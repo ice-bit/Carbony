@@ -18,7 +18,15 @@ class AuthenticationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupButtonStackView()
+        /*if UserDefaults.standard.bool(forKey: "isUserLoggedIn") {
+            print(UserDefaults.standard.bool(forKey: "isUserLoggedIn"))
+            if let summaryViewController = storyboard?.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
+                self.navigationController?.pushViewController(summaryViewController, animated: true)
+            }
+        } else {
+            setupGuestLabel()
+            setupAuthButton()
+        }*/
         setupGuestLabel()
         setupAuthButton()
     }
@@ -79,8 +87,9 @@ class AuthenticationViewController: UIViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         print("Login button  tapped")
         if let loginViewController = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            let rootViewController = UINavigationController(rootViewController: loginViewController)
-            present(rootViewController, animated: true)
+//            let rootViewController = UINavigationController(rootViewController: loginViewController)
+//            present(rootViewController, animated: true)
+            navigationController?.pushViewController(loginViewController, animated: true)
         }
     }
     

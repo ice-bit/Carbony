@@ -23,10 +23,14 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupLoginButton()
         setupResetPasswordLabel()
-        setupCancelButton()
+//        setupCancelButton()
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        userLogin()
+    }
+    
+    private func userLogin() {
         guard let username = usernameTextField.text,
               let password = passwordTextField.text,
               !username.isEmpty,
@@ -36,9 +40,12 @@ class LoginViewController: UIViewController {
               }
         
         if let storedPassword = defaults.string(forKey: username), storedPassword == password {
-            showAlert(title: "Login successful", message: "Please continue.") { [weak self] in
-                self?.dismiss(animated: true)
-            }
+            UserDefaults.standard.set(true, forKey: "isUserLoggedIn") // Set user login
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarViewController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+            
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarViewController)
         } else {
             showAlert(title: "Login denied", message: "Try again.")
         }

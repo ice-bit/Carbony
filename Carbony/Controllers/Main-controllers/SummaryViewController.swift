@@ -1,21 +1,19 @@
 //
-//  DummyViewController.swift
+//  SummaryViewController.swift
 //  Carbony
 //
-//  Created by doss-zstch1212 on 11/08/23.
+//  Created by doss-zstch1212 on 16/08/23.
 //
 
 import UIKit
 
-class DummyViewController: UIViewController {
-
+class SummaryViewController: UIViewController {
+    @IBOutlet weak var userSettingsBarButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-    
-
     /*
     // MARK: - Navigation
 
@@ -25,5 +23,7 @@ class DummyViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
 
 }
