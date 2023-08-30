@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddGoalViewController" customModule="Carbony" customModuleProvider="target">
+            <connections>
+                <outlet property="addGoalButton" destination="erE-16-xFb" id="3ey-4z-Bgy"/>
+                <outlet property="descriptionTextField" destination="r3k-U7-g30" id="f9n-wA-b3l"/>
+                <outlet property="targetTextField" destination="RJc-Ej-BIO" id="mKe-Ma-IIQ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SMo-5s-QLN">
+                    <rect key="frame" x="30" y="89" width="333" height="164"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Target" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RJc-Ej-BIO">
+                            <rect key="frame" x="0.0" y="0.0" width="333" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="Wiz-uo-fVW"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r3k-U7-g30">
+                            <rect key="frame" x="0.0" y="64" width="333" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="MGM-2h-XEH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erE-16-xFb">
+                    <rect key="frame" x="30" y="312" width="333" height="56"/>
+                    <color key="backgroundColor" systemColor="labelColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="Wea-Db-8UA"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Add">
+                        <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="addGoalButtonTapped:" destination="-1" eventType="touchUpInside" id="vPY-AO-AnM"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="SMo-5s-QLN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="9na-UB-OEg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="erE-16-xFb" secondAttribute="trailing" constant="30" id="E1s-fe-BCb"/>
+                <constraint firstItem="erE-16-xFb" firstAttribute="top" secondItem="SMo-5s-QLN" secondAttribute="bottom" constant="59" id="KhE-Mz-kYc"/>
+                <constraint firstItem="erE-16-xFb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="T1v-eO-6pE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SMo-5s-QLN" secondAttribute="trailing" constant="30" id="bix-bj-xdx"/>
+                <constraint firstItem="SMo-5s-QLN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="j3C-QV-bwm"/>
+            </constraints>
+            <point key="canvasLocation" x="-103.05343511450381" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
