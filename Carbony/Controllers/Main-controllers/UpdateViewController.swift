@@ -12,7 +12,6 @@ class UpdateViewController: UIViewController {
 
     @IBOutlet weak var goalTableView: UITableView!
     
-    let firstSectionData = ["Row 1", "Row 2", "Row 3"]
     let secondSectionData = ["Row A", "Row B","Row C","Row D","Row E","Row F"]
     
     var goals: [Goal] = []
@@ -26,11 +25,17 @@ class UpdateViewController: UIViewController {
         goalTableView.delegate = self
         goalTableView.separatorStyle = .none
         
+        DBController.shared.createGoalsTable()
+        DBController.shared.printAllDetailsFromDatabase()
+        goals = DBController.shared.readGoalDB()
+        visibleGoals = goals
+        
         NotificationCenter.default.addObserver(self, selector: #selector(addGoal(notification:)), name: Notification.Name("AddGoalNotification"), object: nil)
     }
     
     @objc private func addGoal(notification: Notification) {
         if let newGoal = notification.object as? Goal {
+            DBController.shared.printAllDetailsFromDatabase()
             goals.append(newGoal)
             visibleGoals = goals
             goalTableView.reloadData()
@@ -58,7 +63,7 @@ extension UpdateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = goalTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as! GoalTableViewCell
         
-        if indexPath.section == 0 && indexPath.row < visibleGoals.count  {
+        if indexPath.section == 0 && indexPath.row < goals.count  {
             cell.updateCell(goal: visibleGoals[indexPath.row])
         } else if indexPath.section == 1 && indexPath.row < secondSectionData.count{
             //

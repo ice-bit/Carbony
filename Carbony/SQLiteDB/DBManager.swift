@@ -17,11 +17,7 @@ class DBManager {
     
     private init() {
         print("DBManager initialized")
-        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("CFDatabase.sqlite")
-        print("File URL: \(fileURL)")
-        if sqlite3_open(fileURL.path, &database) != SQLITE_OK {
-            print("Error opening database")
-        }
+        initializeDB()
     }
     
     // MARK: - Public methods
@@ -34,13 +30,13 @@ class DBManager {
             print("Error parsing statement")
             return false
         }
-    
-        if sqlite3_step(statement) != SQLITE_OK {
+
+        /*if sqlite3_step(statement) != SQLITE_OK {
             print(statement!)
             print("Error executing statement")
             sqlite3_finalize(statement)
             return false
-        }
+        }*/
         
         sqlite3_finalize(statement)
         return true
@@ -86,6 +82,16 @@ class DBManager {
         // releasing memory
         sqlite3_finalize(statement)
         return resultArray
+    }
+    
+    // MARK: - Private methods
+    private func initializeDB() {
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("CFDatabase.sqlite")
+        print("File URL: \(fileURL)")
+        if sqlite3_open(fileURL.path, &database) != SQLITE_OK {
+            print("Error opening database")
+        }
+        print("Database open in location: \(fileURL.path)")
     }
     
     // MARK: - Deinitializer

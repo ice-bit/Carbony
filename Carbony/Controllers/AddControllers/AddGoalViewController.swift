@@ -31,35 +31,12 @@ class AddGoalViewController: UIViewController {
                   return
               }
         
-        let newGoal = Goal(target: target, targetLeft: target, progress: 0, description: description)
+        let newUUID = UUID()
+        let newGoal = Goal(uuid: newUUID, target: target, targetLeft: target, progress: 0, description: description)
+        print("UUID: \(newGoal.uuid)")
+        displayGoalObj(uuid: newGoal.uuid, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
-        let createTableQuery = """
-        CREATE TABLE IF NOT EXISTS goals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            target INTEGER,
-            targetLeft INTEGER,
-            progress INTEGER,
-            description TEXT
-        );
-        """
-
-        
-        let insertQuery = "INSERT INTO goals (target, targetLeft, progress, description) VALUES (\(newGoal.target), \(newGoal.targetLeft), \(newGoal.progress), '\(newGoal.description)');"
-        
-
-        if DBManager.shared.executeNonQuery(query: createTableQuery) {
-            print("Goals table created successfully or already exists")
-        } else {
-            print("Error creating goals table")
-        }
-        
-//        let insertQuery = "INSERT INTO goals (target, targetLeft, progress, description) VALUES (\(newGoal.target), \(newGoal.targetLeft), \(newGoal.progress), '\(newGoal.description)')"
-        print("Insert query: \(insertQuery)")
-        if DBManager.shared.executeNonQuery(query: insertQuery) {
-            print("Goal inserted into database successfully")
-        } else {
-            print("Error inserting goal into database")
-        }
+        DBController.shared.insertInto(uuid: newGoal.uuid.uuidString, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
         NotificationCenter.default.post(name: Notification.Name("AddGoalNotification"), object: newGoal)
         
@@ -76,5 +53,10 @@ class AddGoalViewController: UIViewController {
     
     @objc private func cancelBarButtonTapped() {
         self.dismiss(animated: true)
+        
+    }
+    
+    private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
+        print("Goal\nUUID: \(uuid), Target: \(target), TargetLeft: \(targetLeft), Progress: \(progress), Description: \(description)")
     }
 }

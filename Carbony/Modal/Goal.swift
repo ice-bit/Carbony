@@ -7,9 +7,18 @@
 
 import Foundation
 
-struct Goal {
+class Goal {
+    let uuid: UUID
     let target: Int
     let targetLeft: Int
     let progress: Int
     let description: String
+    
+    init(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
+        self.uuid = uuid
+        self.target = target
+        self.targetLeft = targetLeft
+        self.progress = progress
+        self.description = description
+    }
 }
