@@ -66,7 +66,7 @@ public final class DBController {
         sqlite3_finalize(insertStatement)
     }
     
-    func readGoalDB() -> [Goal] {
+    func readGoalTable() -> [Goal] {
         let queryStatementString: String = "SELECT * FROM \(tableName);"
         var queryStatement: OpaquePointer? 
         var goals: [Goal] = []

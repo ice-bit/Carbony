@@ -8,11 +8,11 @@
 
 import UIKit
 
-class UpdateViewController: UIViewController {
+class GoalViewController: UIViewController {
 
     @IBOutlet weak var goalTableView: UITableView!
     
-    let secondSectionData = ["Row A", "Row B","Row C","Row D","Row E","Row F"]
+    var footprints: [Footprint] = []
     
     var goals: [Goal] = []
     var isSectionZeroVisible: Bool = true
@@ -27,7 +27,7 @@ class UpdateViewController: UIViewController {
         
         DBController.shared.createGoalsTable()
         DBController.shared.printAllDetailsFromDatabase()
-        goals = DBController.shared.readGoalDB()
+        goals = DBController.shared.readGoalTable()
         visibleGoals = goals
         
         NotificationCenter.default.addObserver(self, selector: #selector(addGoal(notification:)), name: Notification.Name("AddGoalNotification"), object: nil)
@@ -47,7 +47,7 @@ class UpdateViewController: UIViewController {
     }
 }
 
-extension UpdateViewController: UITableViewDataSource {
+extension GoalViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -57,23 +57,23 @@ extension UpdateViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? visibleGoals.count : secondSectionData.count
+        return section == 0 ? visibleGoals.count : footprints.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = goalTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as! GoalTableViewCell
         
         if indexPath.section == 0 && indexPath.row < goals.count  {
-            cell.updateCell(goal: visibleGoals[indexPath.row])
-        } else if indexPath.section == 1 && indexPath.row < secondSectionData.count{
-            //
+            cell.updateCell(withGoal: visibleGoals[indexPath.row])
+        } else if indexPath.section == 1 && indexPath.row < footprints.count{
+            // TODO: populate the cell
         }
         
         return cell
     }
 }
 
-extension UpdateViewController: UITableViewDelegate {
+extension GoalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 108.0
     }
@@ -94,9 +94,25 @@ extension UpdateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 49.0
     }
+    
+    // Presenting a vc for the selected row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row < goals.count {
+            let selectedGoal = visibleGoals[indexPath.row]
+            
+            let detailGoalViewController  = GoalDetailedViewController()
+            
+            detailGoalViewController.selectedGoal = selectedGoal
+            
+            self.navigationController?.present(detailGoalViewController, animated: true)
+            
+        } else if indexPath.row == 1 && indexPath.row < footprints.count {
+            // TODO: Handle the footprint selction
+        }
+    }
 }
 
-extension UpdateViewController: GoalSectionHeaderViewDelegate {
+extension GoalViewController: GoalSectionHeaderViewDelegate {
     func toggleButtonTapped(inSection section: Int) {
         if section == 0 {
             isSectionZeroVisible.toggle()

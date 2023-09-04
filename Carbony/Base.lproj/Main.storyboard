@@ -953,7 +953,7 @@
         <!--Eco-->
         <scene sceneID="zMJ-G1-fE5">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="8ig-45-gpS" customClass="UpdateViewController" customModule="Carbony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="8ig-45-gpS" customClass="GoalViewController" customModule="Carbony" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uw9-pA-rgb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1074,7 +1074,7 @@
             <objects>
                 <viewController id="oxR-0p-YTV" customClass="SettingsViewController" customModule="Carbony" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4vC-SY-UfM">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATs-VP-mdX">

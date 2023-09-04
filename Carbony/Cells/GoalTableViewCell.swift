@@ -51,7 +51,7 @@ class GoalTableViewCell: UITableViewCell {
 //        goalContentView.layer.backgroundColor = UIColor(red: 0.969, green: 0.973, blue: 0.976, alpha: 1).cgColor
     }
     
-    func updateCell(goal: Goal) {
+    func updateCell(withGoal goal: Goal) {
         self.descriptionLabel.text = goal.description
         self.progressLabel.text = String(goal.progress)
         self.targetLeftLabel.text = String(goal.targetLeft)
