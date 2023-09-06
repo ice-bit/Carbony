@@ -15,9 +15,13 @@ class AddGoalViewController: UIViewController {
     
     @IBOutlet weak var targetTextField: UITextField!
     
+    @IBOutlet weak var calculateLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddGoalButton()
+        setupLabelAction()
+        setupCancelButton()
         self.title = "Add Goal"
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -42,6 +46,12 @@ class AddGoalViewController: UIViewController {
         
         dismiss(animated: true)
     }
+    
+    private func setupLabelAction() {
+        let calculateLabelTapGesture = UIGestureRecognizer(target: self, action: #selector(calculateLabelAction))
+        calculateLabel.addGestureRecognizer(calculateLabelTapGesture)
+    }
+    
     private func setupAddGoalButton() {
         addGoalButton.layer.cornerRadius = 8
     }
@@ -51,12 +61,19 @@ class AddGoalViewController: UIViewController {
         navigationItem.leftBarButtonItem = cancelButton
     }
     
-    @objc private func cancelBarButtonTapped() {
-        self.dismiss(animated: true)
-        
-    }
-    
     private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
         print("Goal\nUUID: \(uuid), Target: \(target), TargetLeft: \(targetLeft), Progress: \(progress), Description: \(description)")
     }
+    
+    @objc private func cancelBarButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc private func calculateLabelAction() {
+        print("Calculate label tapped")
+        let calculateViewController = CalculateViewController()
+        let rootViewController = UINavigationController(rootViewController: calculateViewController)
+        self.navigationController?.present(rootViewController, animated: true)
+    }
+    
 }

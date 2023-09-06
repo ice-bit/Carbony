@@ -16,6 +16,8 @@
 		553A95F52AA06C2E00ACFA56 /* GoalIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A95F42AA06C2E00ACFA56 /* GoalIDManager.swift */; };
 		553A95F72AA0BC0100ACFA56 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A95F62AA0BC0100ACFA56 /* Footprint.swift */; };
 		553A96012AA5F42D00ACFA56 /* GoalDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A96002AA5F42D00ACFA56 /* GoalDetailedViewController.swift */; };
+		553A96092AA734DB00ACFA56 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A96072AA734DB00ACFA56 /* CalculateViewController.swift */; };
+		553A960A2AA734DB00ACFA56 /* CalculateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553A96082AA734DB00ACFA56 /* CalculateViewController.xib */; };
 		554749F62A8D040200972BFB /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554749F52A8D040200972BFB /* SummaryViewController.swift */; };
 		554749F92A8E2CBE00972BFB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554749F82A8E2CBE00972BFB /* SettingsViewController.swift */; };
 		5598C41A2A9366090072B6D3 /* GoalSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5598C4192A9366090072B6D3 /* GoalSectionHeaderView.swift */; };
@@ -46,6 +48,8 @@
 		553A95F42AA06C2E00ACFA56 /* GoalIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalIDManager.swift; sourceTree = "<group>"; };
 		553A95F62AA0BC0100ACFA56 /* Footprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		553A96002AA5F42D00ACFA56 /* GoalDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailedViewController.swift; sourceTree = "<group>"; };
+		553A96072AA734DB00ACFA56 /* CalculateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
+		553A96082AA734DB00ACFA56 /* CalculateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalculateViewController.xib; sourceTree = "<group>"; };
 		554749F52A8D040200972BFB /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		554749F82A8E2CBE00972BFB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5598C4192A9366090072B6D3 /* GoalSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -106,9 +110,19 @@
 			path = DetailViewControllers;
 			sourceTree = "<group>";
 		};
+		553A96062AA734BE00ACFA56 /* CalculateController */ = {
+			isa = PBXGroup;
+			children = (
+				553A96072AA734DB00ACFA56 /* CalculateViewController.swift */,
+				553A96082AA734DB00ACFA56 /* CalculateViewController.xib */,
+			);
+			path = CalculateController;
+			sourceTree = "<group>";
+		};
 		554749F32A8D03D100972BFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				553A96062AA734BE00ACFA56 /* CalculateController */,
 				553A95F92AA5B7D700ACFA56 /* DetailViewControllers */,
 				5598C4712A93889F0072B6D3 /* AddControllers */,
 				55DE0F5C2A8F9CBA00E0B3DB /* Login */,
@@ -300,6 +314,7 @@
 				5598C4752A938A6F0072B6D3 /* AddGoalViewController.xib in Resources */,
 				55FF687E2A7CCABC003BF61D /* Assets.xcassets in Resources */,
 				55FF687C2A7CCABB003BF61D /* Main.storyboard in Resources */,
+				553A960A2AA734DB00ACFA56 /* CalculateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +330,7 @@
 				55FF688A2A7CCBD9003BF61D /* AuthenticationViewController.swift in Sources */,
 				554749F92A8E2CBE00972BFB /* SettingsViewController.swift in Sources */,
 				55FF68752A7CCABB003BF61D /* AppDelegate.swift in Sources */,
+				553A96092AA734DB00ACFA56 /* CalculateViewController.swift in Sources */,
 				553A95F52AA06C2E00ACFA56 /* GoalIDManager.swift in Sources */,
 				5527A16C2A7D0CD500C42C6B /* RegisterViewController.swift in Sources */,
 				55DE0F6B2A908CDB00E0B3DB /* OffsetTableViewCell.swift in Sources */,

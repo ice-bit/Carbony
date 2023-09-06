@@ -125,6 +125,28 @@ public final class DBController {
         
         sqlite3_finalize(queryStatement)
     }
+    
+    public func updateGoal(uuid: String, newProgress: Int, newTarget: Int) {
+        let updateQuery = """
+                UPDATE \(tableName)
+                SET progress = \(newProgress), target = \(newTarget)
+                WHERE uuid = '\(uuid)';
+                """
+        
+        var updateStatment: OpaquePointer?
+        
+        if sqlite3_prepare_v2(db, updateQuery, -1, &updateStatment, nil) == SQLITE_OK {
+            if sqlite3_step(updateStatment) == SQLITE_DONE {
+                print("Successfully updated goal with UUID: \(uuid)")
+            } else {
+                print("Could not update goal with UUID: \(uuid)")
+            }
+        } else {
+            print("UPDATE statement could not be prepared.")
+        }
+        
+        sqlite3_finalize(updateStatment)
+    }
 
     
     // MARK: - Private methods

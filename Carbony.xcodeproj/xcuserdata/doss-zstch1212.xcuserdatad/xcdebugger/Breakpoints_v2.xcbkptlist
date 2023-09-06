@@ -52,5 +52,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D2B3CCA-7B2D-4E8B-B016-20E010C27D5A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Carbony/Controllers/AddControllers/AddGoalViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "calculateLabelAction()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2D2B3CCA-7B2D-4E8B-B016-20E010C27D5A - d8687ee993204023"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Carbony.AddGoalViewController.calculateLabelAction() -&gt; ()"
+                  moduleName = "Carbony"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/AddControllers/AddGoalViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "2D2B3CCA-7B2D-4E8B-B016-20E010C27D5A - d8687ee993204023"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Carbony.AddGoalViewController.calculateLabelAction() -&gt; ()"
+                  moduleName = "Carbony"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/AddControllers/AddGoalViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

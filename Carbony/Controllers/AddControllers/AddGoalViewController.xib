@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddGoalViewController" customModule="Carbony" customModuleProvider="target">
             <connections>
                 <outlet property="addGoalButton" destination="erE-16-xFb" id="3ey-4z-Bgy"/>
+                <outlet property="calculateLabel" destination="Ln8-AC-sHT" id="SbV-rV-8cr"/>
                 <outlet property="descriptionTextField" destination="r3k-U7-g30" id="f9n-wA-b3l"/>
                 <outlet property="targetTextField" destination="RJc-Ej-BIO" id="mKe-Ma-IIQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,20 +23,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SMo-5s-QLN">
-                    <rect key="frame" x="30" y="89" width="333" height="164"/>
+                    <rect key="frame" x="30" y="89" width="333" height="108"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Target" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RJc-Ej-BIO">
-                            <rect key="frame" x="0.0" y="0.0" width="333" height="56"/>
+                            <rect key="frame" x="0.0" y="0.0" width="333" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="56" id="Wiz-uo-fVW"/>
+                                <constraint firstAttribute="height" constant="44" id="Wiz-uo-fVW"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r3k-U7-g30">
-                            <rect key="frame" x="0.0" y="64" width="333" height="100"/>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r3k-U7-g30">
+                            <rect key="frame" x="0.0" y="52" width="333" height="56"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="MGM-2h-XEH"/>
+                                <constraint firstAttribute="height" constant="56" id="MGM-2h-XEH"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -43,7 +44,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erE-16-xFb">
-                    <rect key="frame" x="30" y="312" width="333" height="56"/>
+                    <rect key="frame" x="30" y="256" width="333" height="56"/>
                     <color key="backgroundColor" systemColor="labelColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="Wea-Db-8UA"/>
@@ -56,14 +57,22 @@
                         <action selector="addGoalButtonTapped:" destination="-1" eventType="touchUpInside" id="vPY-AO-AnM"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't know Value? Calculate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ln8-AC-sHT">
+                    <rect key="frame" x="198.33333333333337" y="205" width="164.66666666666663" height="14.333333333333343"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                    <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ln8-AC-sHT" secondAttribute="trailing" constant="30" id="01Y-ME-ONf"/>
                 <constraint firstItem="SMo-5s-QLN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="9na-UB-OEg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="erE-16-xFb" secondAttribute="trailing" constant="30" id="E1s-fe-BCb"/>
                 <constraint firstItem="erE-16-xFb" firstAttribute="top" secondItem="SMo-5s-QLN" secondAttribute="bottom" constant="59" id="KhE-Mz-kYc"/>
                 <constraint firstItem="erE-16-xFb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="T1v-eO-6pE"/>
+                <constraint firstItem="Ln8-AC-sHT" firstAttribute="top" secondItem="SMo-5s-QLN" secondAttribute="bottom" constant="8" symbolic="YES" id="ah3-20-5lO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SMo-5s-QLN" secondAttribute="trailing" constant="30" id="bix-bj-xdx"/>
                 <constraint firstItem="SMo-5s-QLN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="j3C-QV-bwm"/>
             </constraints>
@@ -73,6 +82,9 @@
     <resources>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

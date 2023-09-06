@@ -64,7 +64,7 @@ extension GoalViewController: UITableViewDataSource {
         let cell = goalTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as! GoalTableViewCell
         
         if indexPath.section == 0 && indexPath.row < goals.count  {
-            cell.updateCell(withGoal: visibleGoals[indexPath.row])
+            cell.updateCell(withGoal: visibleGoals[indexPath.row].)
         } else if indexPath.section == 1 && indexPath.row < footprints.count{
             // TODO: populate the cell
         }
@@ -100,11 +100,11 @@ extension GoalViewController: UITableViewDelegate {
         if indexPath.section == 0 && indexPath.row < goals.count {
             let selectedGoal = visibleGoals[indexPath.row]
             
-            let detailGoalViewController  = GoalDetailedViewController()
+            let goalDetailedViewController  = GoalDetailedViewController()
             
-            detailGoalViewController.selectedGoal = selectedGoal
+            goalDetailedViewController.selectedGoal = selectedGoal
             
-            self.navigationController?.present(detailGoalViewController, animated: true)
+            self.navigationController?.pushViewController(goalDetailedViewController, animated: true)
             
         } else if indexPath.row == 1 && indexPath.row < footprints.count {
             // TODO: Handle the footprint selction
