@@ -17,6 +17,16 @@ class GoalSectionHeaderView: UIView {
     
     weak var delegate: GoalSectionHeaderViewDelegate?
     
+//    var isExpanded: Bool = false
+    var isToggleCellButtonTapped = false {
+        didSet {
+            toggleCellVisibilityButton.setImage(isToggleCellButtonTapped ? tappedToggleImage : initialToggleImage, for: .normal)
+        }
+    }
+    
+    let initialToggleImage = UIImage(systemName: "chevron.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+    let tappedToggleImage = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+
     let headerLabel: UILabel = {
         let label = UILabel()
         label.text = "Goals"
@@ -46,7 +56,6 @@ class GoalSectionHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupHeaderUI()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -70,6 +79,7 @@ class GoalSectionHeaderView: UIView {
             toggleCellVisibilityButton.leadingAnchor.constraint(equalTo: headerLabel.trailingAnchor, constant: 8),
             toggleCellVisibilityButton.topAnchor.constraint(equalTo: topAnchor, constant: 16)
         ])
+    
         headerAddButton.addTarget(self, action: #selector(addGoalButtonTapped), for: .touchUpInside)
         toggleCellVisibilityButton.addTarget(self, action: #selector(toggleCellButtonTapped), for: .touchUpInside)
     }
@@ -81,6 +91,16 @@ class GoalSectionHeaderView: UIView {
     
     @objc private func toggleCellButtonTapped() {
         print("Button tapped: \(toggleCellVisibilityButton.titleLabel?.text ?? "ToggleCellVisibility ")")
+        isToggleCellButtonTapped.toggle()
         delegate?.toggleButtonTapped(inSection: tag)
     }
+    
+    /*private func updateToggleCellButtonImage() {
+        isExpanded.toggle()
+        let imageName = isExpanded ? "chevron.up" : "chevron.down"
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 18)
+        let image = UIImage(systemName: imageName, withConfiguration: symbolConfiguration)
+        toggleCellVisibilityButton.setImage(image, for: .normal)
+        print("Minimin's sister is really cool")
+    }*/
 }

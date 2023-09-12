@@ -32,11 +32,12 @@ class AddGoalViewController: UIViewController {
               let target = Int(targetText),
               target > 1000,
               !description.isEmpty else {
+                    showAlert()
                   return
               }
         
         let newUUID = UUID()
-        let newGoal = Goal(uuid: newUUID, target: target, targetLeft: target, progress: 0, description: description)
+        let newGoal = Goal(uuid: newUUID, target: target, targetLeft: target, progress: 0.0, description: description)
         print("UUID: \(newGoal.uuid)")
         displayGoalObj(uuid: newGoal.uuid, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
@@ -61,8 +62,16 @@ class AddGoalViewController: UIViewController {
         navigationItem.leftBarButtonItem = cancelButton
     }
     
-    private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
+    private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Double, description: String) {
         print("Goal\nUUID: \(uuid), Target: \(target), TargetLeft: \(targetLeft), Progress: \(progress), Description: \(description)")
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Invalid Input", message: "Target should only contain numbers!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true)
     }
     
     @objc private func cancelBarButtonTapped() {

@@ -19,8 +19,11 @@ class GoalViewController: UIViewController {
     var isSectionOneVisibile: Bool = true
     var visibleGoals: [Goal] = []
     
+    var isExpanded: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         goalTableView.dataSource = self
         goalTableView.delegate = self
         goalTableView.separatorStyle = .none
@@ -28,17 +31,48 @@ class GoalViewController: UIViewController {
         DBController.shared.createGoalsTable()
         DBController.shared.printAllDetailsFromDatabase()
         goals = DBController.shared.readGoalTable()
-        visibleGoals = goals
+        visibleGoals = goals.reversed()
         
         NotificationCenter.default.addObserver(self, selector: #selector(addGoal(notification:)), name: Notification.Name("AddGoalNotification"), object: nil)
+    }
+    
+   override func viewWillAppear(_ animated: Bool) {
+       print(#function)
+        super.viewWillAppear(animated)
+        goals = DBController.shared.readGoalTable()
+        visibleGoals = goals.reversed()
+        goalTableView.reloadData()
     }
     
     @objc private func addGoal(notification: Notification) {
         if let newGoal = notification.object as? Goal {
             DBController.shared.printAllDetailsFromDatabase()
             goals.append(newGoal)
-            visibleGoals = goals
-            goalTableView.reloadData()
+            visibleGoals = goals.reversed()
+            
+            if let newIndex = visibleGoals.firstIndex(where: { $0 == newGoal }) {
+                let sectionToReload = 0
+                let indexPathToReload = IndexPath(row: newIndex, section: sectionToReload)
+                
+                goalTableView.beginUpdates()
+                goalTableView.insertRows(at: [indexPathToReload], with: .automatic)
+                goalTableView.endUpdates()
+                
+                DispatchQueue.main.async {
+                    // Scroll to the top
+                    self.goalTableView.scrollToRow(at: indexPathToReload, at: .top, animated: true)
+                    
+                    if let cell = self.goalTableView.cellForRow(at: indexPathToReload) {
+                        cell.backgroundColor = UIColor.systemGray5
+                    }
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    if let cell = self.goalTableView.cellForRow(at: indexPathToReload) {
+                        cell.backgroundColor = UIColor.white
+                    }
+                }
+            }
         }
     }
     
@@ -64,7 +98,7 @@ extension GoalViewController: UITableViewDataSource {
         let cell = goalTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as! GoalTableViewCell
         
         if indexPath.section == 0 && indexPath.row < goals.count  {
-            cell.updateCell(withGoal: visibleGoals[indexPath.row].)
+            cell.updateCell(withGoal: visibleGoals[indexPath.row])
         } else if indexPath.section == 1 && indexPath.row < footprints.count{
             // TODO: populate the cell
         }
@@ -112,19 +146,28 @@ extension GoalViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - GoalSectionHeaderViewDelegate
 extension GoalViewController: GoalSectionHeaderViewDelegate {
+    /*func updateToggleCellButtonImage(forButton: UIButton) {
+        isExpanded.toggle()
+        let imageName = isExpanded ? "chevron.up" : "chevron.down"
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 18)
+        let image = UIImage(systemName: imageName, withConfiguration: symbolConfiguration)
+        forButton.setImage(image, for: .normal)
+    }*/
+
     func toggleButtonTapped(inSection section: Int) {
         if section == 0 {
             isSectionZeroVisible.toggle()
             if isSectionZeroVisible {
-                visibleGoals = goals
+                visibleGoals = goals.reversed()
             } else {
                 visibleGoals.removeAll()
             }
         } else if section == 1 {
             isSectionOneVisibile.toggle()
         }
-//        goalTableView.reloadSections(IndexSet(integer: section), with: .fade)
+        
         goalTableView.reloadData()
     }
     

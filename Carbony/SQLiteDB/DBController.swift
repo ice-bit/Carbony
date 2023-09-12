@@ -47,7 +47,7 @@ public final class DBController {
         sqlite3_finalize(createTableStatement)
     }
     
-    public func insertInto(uuid: String, target: Int, targetLeft: Int, progress: Int, description: String) {
+    public func insertInto(uuid: String, target: Int, targetLeft: Int, progress: Double, description: String) {
         let insertQuery = """
             INSERT INTO \(tableName) (uuid, target, targetLeft, progress, description)
             VALUES ('\(uuid)', \(target), \(targetLeft), \(progress), '\(description)');
@@ -82,7 +82,7 @@ public final class DBController {
                 print("Target: \(target)")
                 
                 if let uuid = UUID(uuidString: uuidString) {
-                    let goal = Goal(uuid: uuid, target: Int(target), targetLeft: Int(targetLeft), progress: Int(progress), description: description)
+                    let goal = Goal(uuid: uuid, target: Int(target), targetLeft: Int(targetLeft), progress: Double(progress), description: description)
                     goals.append(goal)
                     
                     print("Query result:")
@@ -126,10 +126,10 @@ public final class DBController {
         sqlite3_finalize(queryStatement)
     }
     
-    public func updateGoal(uuid: String, newProgress: Int, newTarget: Int) {
+    public func updateGoal(uuid: String, newProgress: Double, newTargetLeft: Int) {
         let updateQuery = """
                 UPDATE \(tableName)
-                SET progress = \(newProgress), target = \(newTarget)
+                SET progress = \(newProgress), targetLeft = \(newTargetLeft)
                 WHERE uuid = '\(uuid)';
                 """
         
@@ -146,6 +146,41 @@ public final class DBController {
         }
         
         sqlite3_finalize(updateStatment)
+    }
+
+    func readGoal(withUUID uuid: String) -> Goal? {
+        let queryStatementString = "SELECT * FROM \(tableName) WHERE uuid = ?;"
+        var queryStatement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(queryStatement, 1, uuid, -1, nil) // Bind the UUID value to the query
+            
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+                let target = sqlite3_column_int(queryStatement, 1)
+                let targetLeft = sqlite3_column_int(queryStatement, 2)
+                let progress = sqlite3_column_int(queryStatement, 3)
+                let description = String(cString: sqlite3_column_text(queryStatement, 4))
+                
+                if let uuid = UUID(uuidString: uuid) {
+                    let goal = Goal(uuid: uuid, target: Int(target), targetLeft: Int(targetLeft), progress: Double(progress), description: description)
+                    
+                    print("Query result:")
+                    print("\(uuid) | \(target) | \(targetLeft) | \(progress) | \(description)")
+                    
+                    sqlite3_finalize(queryStatement)
+                    return goal
+                } else {
+                    print("Error converting uuidString value into UUID")
+                }
+            } else {
+                print("No row found with UUID: \(uuid)")
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        
+        sqlite3_finalize(queryStatement)
+        return nil
     }
 
     

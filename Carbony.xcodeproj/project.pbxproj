@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5507C4922A86666300CFB476 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507C4912A86666300CFB476 /* UIViewController+Alert.swift */; };
-		551A5AD22A94CDB200FCD495 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A5AD12A94CDB200FCD495 /* DBManager.swift */; };
 		5527A1682A7CE33400C42C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5527A1672A7CE33400C42C6B /* LoginViewController.swift */; };
 		5527A16A2A7D00A400C42C6B /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5527A1692A7D00A400C42C6B /* CustomLoginButton.swift */; };
 		5527A16C2A7D0CD500C42C6B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5527A16B2A7D0CD500C42C6B /* RegisterViewController.swift */; };
@@ -18,8 +17,11 @@
 		553A96012AA5F42D00ACFA56 /* GoalDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A96002AA5F42D00ACFA56 /* GoalDetailedViewController.swift */; };
 		553A96092AA734DB00ACFA56 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A96072AA734DB00ACFA56 /* CalculateViewController.swift */; };
 		553A960A2AA734DB00ACFA56 /* CalculateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553A96082AA734DB00ACFA56 /* CalculateViewController.xib */; };
+		553A96102AA9D10000ACFA56 /* UpdateGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A960F2AA9D10000ACFA56 /* UpdateGoalView.swift */; };
+		553A96142AA9DF1200ACFA56 /* UpdateGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A96132AA9DF1200ACFA56 /* UpdateGoalViewController.swift */; };
 		554749F62A8D040200972BFB /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554749F52A8D040200972BFB /* SummaryViewController.swift */; };
 		554749F92A8E2CBE00972BFB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554749F82A8E2CBE00972BFB /* SettingsViewController.swift */; };
+		558F0CE32AAEE4F5007C3055 /* OffsetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558F0CE22AAEE4F5007C3055 /* OffsetViewController.swift */; };
 		5598C41A2A9366090072B6D3 /* GoalSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5598C4192A9366090072B6D3 /* GoalSectionHeaderView.swift */; };
 		5598C4742A938A6F0072B6D3 /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5598C4722A938A6F0072B6D3 /* AddGoalViewController.swift */; };
 		5598C4752A938A6F0072B6D3 /* AddGoalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5598C4732A938A6F0072B6D3 /* AddGoalViewController.xib */; };
@@ -40,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		5507C4912A86666300CFB476 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
-		551A5AD12A94CDB200FCD495 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		5527A1672A7CE33400C42C6B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5527A1692A7D00A400C42C6B /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		5527A16B2A7D0CD500C42C6B /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -50,8 +51,11 @@
 		553A96002AA5F42D00ACFA56 /* GoalDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailedViewController.swift; sourceTree = "<group>"; };
 		553A96072AA734DB00ACFA56 /* CalculateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
 		553A96082AA734DB00ACFA56 /* CalculateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalculateViewController.xib; sourceTree = "<group>"; };
+		553A960F2AA9D10000ACFA56 /* UpdateGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGoalView.swift; sourceTree = "<group>"; };
+		553A96132AA9DF1200ACFA56 /* UpdateGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGoalViewController.swift; sourceTree = "<group>"; };
 		554749F52A8D040200972BFB /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		554749F82A8E2CBE00972BFB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		558F0CE22AAEE4F5007C3055 /* OffsetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetViewController.swift; sourceTree = "<group>"; };
 		5598C4192A9366090072B6D3 /* GoalSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionHeaderView.swift; sourceTree = "<group>"; };
 		5598C4722A938A6F0072B6D3 /* AddGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
 		5598C4732A938A6F0072B6D3 /* AddGoalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddGoalViewController.xib; sourceTree = "<group>"; };
@@ -96,7 +100,6 @@
 		551A5AD02A94CD9900FCD495 /* SQLiteDB */ = {
 			isa = PBXGroup;
 			children = (
-				551A5AD12A94CDB200FCD495 /* DBManager.swift */,
 				55A351612A9F1F6500EB4EC5 /* DBController.swift */,
 			);
 			path = SQLiteDB;
@@ -110,21 +113,27 @@
 			path = DetailViewControllers;
 			sourceTree = "<group>";
 		};
-		553A96062AA734BE00ACFA56 /* CalculateController */ = {
+		553A960B2AA9D06400ACFA56 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				553A96072AA734DB00ACFA56 /* CalculateViewController.swift */,
-				553A96082AA734DB00ACFA56 /* CalculateViewController.xib */,
+				553A960C2AA9D07100ACFA56 /* UpdateView */,
 			);
-			path = CalculateController;
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		553A960C2AA9D07100ACFA56 /* UpdateView */ = {
+			isa = PBXGroup;
+			children = (
+				553A960F2AA9D10000ACFA56 /* UpdateGoalView.swift */,
+			);
+			path = UpdateView;
 			sourceTree = "<group>";
 		};
 		554749F32A8D03D100972BFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				553A96062AA734BE00ACFA56 /* CalculateController */,
 				553A95F92AA5B7D700ACFA56 /* DetailViewControllers */,
-				5598C4712A93889F0072B6D3 /* AddControllers */,
+				5598C4712A93889F0072B6D3 /* UpdateControllers */,
 				55DE0F5C2A8F9CBA00E0B3DB /* Login */,
 				554749F72A8E2CAC00972BFB /* Settings-controllers */,
 				554749F42A8D03E200972BFB /* Main-controllers */,
@@ -138,6 +147,7 @@
 				554749F52A8D040200972BFB /* SummaryViewController.swift */,
 				55DE0F662A8FA8AE00E0B3DB /* GoalViewController.swift */,
 				55DE0F6C2A908E9500E0B3DB /* ModalEX.swift */,
+				558F0CE22AAEE4F5007C3055 /* OffsetViewController.swift */,
 			);
 			path = "Main-controllers";
 			sourceTree = "<group>";
@@ -158,13 +168,16 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
-		5598C4712A93889F0072B6D3 /* AddControllers */ = {
+		5598C4712A93889F0072B6D3 /* UpdateControllers */ = {
 			isa = PBXGroup;
 			children = (
+				553A96072AA734DB00ACFA56 /* CalculateViewController.swift */,
+				553A96082AA734DB00ACFA56 /* CalculateViewController.xib */,
 				5598C4722A938A6F0072B6D3 /* AddGoalViewController.swift */,
 				5598C4732A938A6F0072B6D3 /* AddGoalViewController.xib */,
+				553A96132AA9DF1200ACFA56 /* UpdateGoalViewController.swift */,
 			);
-			path = AddControllers;
+			path = UpdateControllers;
 			sourceTree = "<group>";
 		};
 		5598C4762A938FAF0072B6D3 /* Modal */ = {
@@ -226,6 +239,7 @@
 		55FF68732A7CCABB003BF61D /* Carbony */ = {
 			isa = PBXGroup;
 			children = (
+				553A960B2AA9D06400ACFA56 /* SwiftUI */,
 				551A5AD02A94CD9900FCD495 /* SQLiteDB */,
 				5598C4762A938FAF0072B6D3 /* Modal */,
 				5598C4162A9365650072B6D3 /* CustomViews */,
@@ -337,12 +351,14 @@
 				55DE0F632A8F9F1E00E0B3DB /* GoalTableViewCell.swift in Sources */,
 				5598C4742A938A6F0072B6D3 /* AddGoalViewController.swift in Sources */,
 				553A96012AA5F42D00ACFA56 /* GoalDetailedViewController.swift in Sources */,
+				553A96142AA9DF1200ACFA56 /* UpdateGoalViewController.swift in Sources */,
+				558F0CE32AAEE4F5007C3055 /* OffsetViewController.swift in Sources */,
 				554749F62A8D040200972BFB /* SummaryViewController.swift in Sources */,
 				5507C4922A86666300CFB476 /* UIViewController+Alert.swift in Sources */,
 				55FF68772A7CCABB003BF61D /* SceneDelegate.swift in Sources */,
+				553A96102AA9D10000ACFA56 /* UpdateGoalView.swift in Sources */,
 				5598C41A2A9366090072B6D3 /* GoalSectionHeaderView.swift in Sources */,
 				5598C4782A938FE70072B6D3 /* Goal.swift in Sources */,
-				551A5AD22A94CDB200FCD495 /* DBManager.swift in Sources */,
 				5527A16A2A7D00A400C42C6B /* CustomLoginButton.swift in Sources */,
 				5527A1682A7CE33400C42C6B /* LoginViewController.swift in Sources */,
 				55FF688D2A7CD415003BF61D /* AuthCustomView.swift in Sources */,

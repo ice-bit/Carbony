@@ -7,18 +7,26 @@
 
 import Foundation
 
-class Goal {
+class Goal: Hashable {
     let uuid: UUID
     let target: Int
     let targetLeft: Int
-    let progress: Int
+    let progress: Double
     let description: String
     
-    init(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
+    init(uuid: UUID, target: Int, targetLeft: Int, progress: Double, description: String) {
         self.uuid = uuid
         self.target = target
         self.targetLeft = targetLeft
         self.progress = progress
         self.description = description
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+    
+    static func == (lhs: Goal, rhs: Goal) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

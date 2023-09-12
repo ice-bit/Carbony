@@ -10,18 +10,11 @@ import UIKit
 class GoalDetailedViewController: UIViewController {
     // MARK: - Properties
     var selectedGoal: Goal?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.systemBackground
-        setupUI()
-    }
     
     // MARK: - UIComponents initializatiion
-    
-    let cancelButton: UIButton = {
+    let calculateButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("Calculate", for: .normal)
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 0.855, green: 0.855, blue: 0.855, alpha: 1).cgColor
@@ -111,39 +104,83 @@ class GoalDetailedViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+
+    // MARK: - viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.systemBackground
+        self.title = "Goal"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        setupUI()
+    }
+    // MARK: - OBJC methods
+    
+   /* @objc private func updateButtonTapped() {
+        print("Update button tapped")
+        let updateViewController = UpdateGoalViewController()
+        // setting delegate
+        updateViewController.selectedGoal = selectedGoal
+        let rootViewController = UINavigationController(rootViewController: updateViewController)
+        self.navigationController?.present(rootViewController, animated: true)
+    }*/
+    
+    @objc private func updateButtonTapped() {
+        print("Update button tapped")
+        let updateViewController = UpdateGoalViewController()
+        let nav = UINavigationController(rootViewController: updateViewController)
+        nav.modalPresentationStyle = .pageSheet
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.selectedDetentIdentifier = .large
+            sheet.prefersGrabberVisible = true
+        }
+        // setting delegate
+        updateViewController.selectedGoal = selectedGoal
+        self.navigationController?.present(nav, animated: true)
+    }
+    
+    @objc private func calculateButtonAction() {
+        print("Calculate button tapped")
+        let calculateViewController = CalculateViewController()
+        let rootViewController = UINavigationController(rootViewController: calculateViewController)
+        self.present(rootViewController, animated: true)
+    }
+    
+    
     
     // MARK: - Setup UI methods
     
     private func setupUI() {
         setupLabels()
         setupDescriptionContainerView()
-        setupDescriptionLabel()
-        setupDescriptionLabelText()
-        setupUpdateValueTextField()
+//        setupUpdateValueTextField()
         setupButtons()
     }
     
     private func setupButtons() {
-        view.addSubview(cancelButton)
+        view.addSubview(calculateButton)
         view.addSubview(updateButton)
         
         NSLayoutConstraint.activate([
-            // cancelButton constraints
-            cancelButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5,constant: -20),
-            cancelButton.heightAnchor.constraint(equalToConstant: 49),
-            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-//            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -56),
-            cancelButton.topAnchor.constraint(equalTo: updateValueTextField.bottomAnchor, constant: 56),
-            // updateButton constraints
-            updateButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5,constant: -20),
+            calculateButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5,constant: -25),
+            updateButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5,constant: -25),
+            
+            /*cancelButton.topAnchor.constraint(equalTo: updateValueTextField.bottomAnchor, constant: 56),
+            updateButton.topAnchor.constraint(equalTo: updateValueTextField.bottomAnchor, constant: 56),*/
+            calculateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            updateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            
             updateButton.heightAnchor.constraint(equalToConstant: 49),
-            updateButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//            updateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -56)
-            updateButton.topAnchor.constraint(equalTo: updateValueTextField.bottomAnchor, constant: 56)
+            calculateButton.heightAnchor.constraint(equalToConstant: 49),
+            
+            calculateButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            updateButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
         
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        calculateButton.addTarget(self, action: #selector(calculateButtonAction), for: .touchUpInside)
     }
 
 //    private func setupUpdateButton
@@ -165,44 +202,23 @@ class GoalDetailedViewController: UIViewController {
         NSLayoutConstraint.activate([
             // progressLabel constraints
             progressLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            progressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 23),
+            progressLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             // percentageLabel constraints
             percentageIconLabel.leadingAnchor.constraint(equalTo: progressLabel.trailingAnchor, constant: 2),
-            percentageIconLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 23),
+            percentageIconLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             // ofLabel constraints
             ofLabel.leadingAnchor.constraint(equalTo: percentageIconLabel.trailingAnchor, constant: 2),
-            ofLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65),
+            ofLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             // targetLeftLabel constraints
             targetLeftLabel.leadingAnchor.constraint(equalTo: ofLabel.trailingAnchor, constant: 2),
-            targetLeftLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65)
+            targetLeftLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40)
         ])
     }
     
     // DescriptionContainerView Constraints
     private func setupDescriptionContainerView() {
         view.addSubview(descriptionContainerView)
-        
-        NSLayoutConstraint.activate([
-            descriptionContainerView.topAnchor.constraint(equalTo: progressLabel.bottomAnchor, constant: 16),
-            descriptionContainerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-           /* descriptionContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            descriptionContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),*/
-            descriptionContainerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            descriptionContainerView.heightAnchor.constraint(equalToConstant: 100)
-        ])
-    }
-    
-    private func setupDescriptionLabel() {
         descriptionContainerView.addSubview(descriptionLabel)
-
-        NSLayoutConstraint.activate([
-            // descriptionLabel constraints
-            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: 8),
-            descriptionLabel.topAnchor.constraint(equalTo: descriptionContainerView.topAnchor, constant: 8)
-        ])
-    }
-    
-    private func setupDescriptionLabelText() {
         descriptionContainerView.addSubview(descriptionLabelText)
         
         if let descriptionText = selectedGoal?.description {
@@ -210,10 +226,17 @@ class GoalDetailedViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            // descriptionlabelText constraints
+            descriptionContainerView.topAnchor.constraint(equalTo: progressLabel.bottomAnchor, constant: 16),
+            descriptionContainerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            descriptionContainerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: 8),
+            descriptionLabel.topAnchor.constraint(equalTo: descriptionContainerView.topAnchor, constant: 8),
+            
             descriptionLabelText.topAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 24),
             descriptionLabelText.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: 8),
-            descriptionLabelText.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -8)
+            descriptionLabelText.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -8),
+            descriptionContainerView.bottomAnchor.constraint(equalTo: descriptionLabelText.bottomAnchor, constant: 8)
         ])
     }
     
@@ -227,15 +250,13 @@ class GoalDetailedViewController: UIViewController {
             updateValueTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
-    
-    // MARK: - OBJC methods
-    
-    @objc private func updateButtonTapped() {
-        print("Update button tapped")
-    }
-    
-    @objc private func cancelButtonTapped() {
-        self.dismiss(animated: true)
-    }
+}
 
+// MARK: - Extensions
+extension GoalDetailedViewController: UpdateGoalDelegate {
+    func setUpdatedGoal(with goal: Goal) {
+        selectedGoal = goal
+    }
+    
+    
 }
