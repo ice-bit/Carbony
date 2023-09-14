@@ -7,206 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "62E4813B-B392-452D-B3DE-B9A8EA3B7E0B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Carbony/Login-Module/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "forgotPasswordLabelTapped()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "62E4813B-B392-452D-B3DE-B9A8EA3B7E0B - 83ade0f47be7b0d7"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Carbony.LoginViewController.forgotPasswordLabelTapped() -&gt; ()"
-                  moduleName = "Carbony"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Login-Module/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "524">
-               </Location>
-               <Location
-                  uuid = "62E4813B-B392-452D-B3DE-B9A8EA3B7E0B - 83ade0f47be7b0d7"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Carbony.LoginViewController.forgotPasswordLabelTapped() -&gt; ()"
-                  moduleName = "Carbony"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Login-Module/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "660">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2D2B3CCA-7B2D-4E8B-B016-20E010C27D5A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Carbony/Controllers/AddControllers/AddGoalViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "calculateLabelAction()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1DB86792-6668-4AA0-81C4-6B65F533889E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Carbony/CustomViews/GoalSectionHeaderView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "GoalSectionHeaderView"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "916AF17F-599C-44D8-9FD2-62BCD3336E73"
+            uuid = "4B6EDF77-A4DF-4948-939F-3FF2420FD24B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Carbony/Controllers/DetailViewControllers/GoalDetailedViewController.swift"
+            filePath = "Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "GoalDetailedViewController"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "016CA32C-2D46-4E16-9EE1-438F38E55A21"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Carbony/Controllers/Main-controllers/GoalViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "updateGoal(for:with:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "016CA32C-2D46-4E16-9EE1-438F38E55A21 - 97b5688c040747dd"
+                  uuid = "4B6EDF77-A4DF-4948-939F-3FF2420FD24B - 9c45cdc1572a765a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Carbony.GoalViewController.viewDidLoad() -&gt; ()"
+                  symbolName = "Carbony.UpdateGoalViewController.updateGoal(for: Carbony.Goal, with: Swift.Int) -&gt; Carbony.Goal"
                   moduleName = "Carbony"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/Main-controllers/GoalViewController.swift"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "972">
                </Location>
                <Location
-                  uuid = "016CA32C-2D46-4E16-9EE1-438F38E55A21 - 97b5688c040747dd"
+                  uuid = "4B6EDF77-A4DF-4948-939F-3FF2420FD24B - 9c45cdc1572a765a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Carbony.GoalViewController.viewDidLoad() -&gt; ()"
+                  symbolName = "Carbony.UpdateGoalViewController.updateGoal(for: Carbony.Goal, with: Swift.Int) -&gt; Carbony.Goal"
                   moduleName = "Carbony"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/Main-controllers/GoalViewController.swift"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "96">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "57E0C6CB-D0C6-4FA4-A97A-0038E9F9AB0D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Carbony/Controllers/Main-controllers/GoalViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "57E0C6CB-D0C6-4FA4-A97A-0038E9F9AB0D - d6a685e6a72ab5bb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Carbony.GoalViewController.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "Carbony"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/Main-controllers/GoalViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "57E0C6CB-D0C6-4FA4-A97A-0038E9F9AB0D - d6a685e6a72ab598"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Carbony.GoalViewController.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "Carbony"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/Main-controllers/GoalViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "57E0C6CB-D0C6-4FA4-A97A-0038E9F9AB0D - d6a685e6a72ab598"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Carbony.GoalViewController.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "Carbony"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/Main-controllers/GoalViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "132">
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "1576">
                </Location>
             </Locations>
          </BreakpointContent>

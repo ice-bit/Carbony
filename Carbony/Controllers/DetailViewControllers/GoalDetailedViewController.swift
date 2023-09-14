@@ -3,7 +3,8 @@
 //  Carbony
 //
 //  Created by doss-zstch1212 on 04/09/23.
-//
+///A58A8730-415A-4C5E-A72A-C0F50CF05533
+///A58A8730-415A-4C5E-A72A-C0F50CF05533
 
 import UIKit
 
@@ -62,7 +63,7 @@ class GoalDetailedViewController: UIViewController {
         return label
     }()
     
-    let targetLeftLabel: UILabel = {
+    let targetLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .light)
         label.lineBreakMode = .byWordWrapping
@@ -104,6 +105,13 @@ class GoalDetailedViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
+    let targetLeftLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -112,32 +120,38 @@ class GoalDetailedViewController: UIViewController {
         self.title = "Goal"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
+        
     }
     // MARK: - OBJC methods
-    
-   /* @objc private func updateButtonTapped() {
-        print("Update button tapped")
-        let updateViewController = UpdateGoalViewController()
-        // setting delegate
-        updateViewController.selectedGoal = selectedGoal
-        let rootViewController = UINavigationController(rootViewController: updateViewController)
-        self.navigationController?.present(rootViewController, animated: true)
-    }*/
-    
     @objc private func updateButtonTapped() {
         print("Update button tapped")
-        let updateViewController = UpdateGoalViewController()
-        let nav = UINavigationController(rootViewController: updateViewController)
-        nav.modalPresentationStyle = .pageSheet
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-            sheet.selectedDetentIdentifier = .large
-            sheet.prefersGrabberVisible = true
+        
+        if let selectedGoal = selectedGoal, selectedGoal.progress == 100 {
+            let alertController = UIAlertController(title: "Progress already 100%", message: "You cannot update the progress because it's already at 100%.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .default)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
+        } else {
+            if let goalUUID = selectedGoal?.uuid, let fetchedGoal = fetchGoal(with: goalUUID) {
+                let updateViewController = UpdateGoalViewController()
+                
+                updateViewController.delegate = self
+                updateViewController.selectedGoal = fetchedGoal
+                
+                let nav = UINavigationController(rootViewController: updateViewController)
+                nav.modalPresentationStyle = .pageSheet
+                if let sheet = nav.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                    sheet.selectedDetentIdentifier = .large
+                    sheet.prefersGrabberVisible = true
+                }
+                
+                self.navigationController?.present(nav, animated: true)
+            } else {
+                print("Failed to fetch the goal with UUID: \(String(describing: selectedGoal?.uuid))")
+            }
         }
-        // setting delegate
-        updateViewController.selectedGoal = selectedGoal
-        self.navigationController?.present(nav, animated: true)
     }
     
     @objc private func calculateButtonAction() {
@@ -154,7 +168,6 @@ class GoalDetailedViewController: UIViewController {
     private func setupUI() {
         setupLabels()
         setupDescriptionContainerView()
-//        setupUpdateValueTextField()
         setupButtons()
     }
     
@@ -189,14 +202,14 @@ class GoalDetailedViewController: UIViewController {
         view.addSubview(progressLabel)
         view.addSubview(percentageIconLabel)
         view.addSubview(ofLabel)
-        view.addSubview(targetLeftLabel)
+        view.addSubview(targetLabel)
         
-        if let progress = selectedGoal?.progress {
+    if let progress = selectedGoal?.progress {
             progressLabel.text = String(progress)
         }
         
-        if let targetLeft = selectedGoal?.targetLeft {
-            targetLeftLabel.text = String(targetLeft)
+        if let target = selectedGoal?.target {
+            targetLabel.text = String(target)
         }
         
         NSLayoutConstraint.activate([
@@ -210,8 +223,8 @@ class GoalDetailedViewController: UIViewController {
             ofLabel.leadingAnchor.constraint(equalTo: percentageIconLabel.trailingAnchor, constant: 2),
             ofLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             // targetLeftLabel constraints
-            targetLeftLabel.leadingAnchor.constraint(equalTo: ofLabel.trailingAnchor, constant: 2),
-            targetLeftLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40)
+            targetLabel.leadingAnchor.constraint(equalTo: ofLabel.trailingAnchor, constant: 2),
+            targetLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40)
         ])
     }
     
@@ -220,9 +233,14 @@ class GoalDetailedViewController: UIViewController {
         view.addSubview(descriptionContainerView)
         descriptionContainerView.addSubview(descriptionLabel)
         descriptionContainerView.addSubview(descriptionLabelText)
+        descriptionContainerView.addSubview(targetLeftLabel)
         
         if let descriptionText = selectedGoal?.description {
             descriptionLabelText.text = String(descriptionText)
+        }
+        
+        if let targetLeft = selectedGoal?.targetLeft {
+            targetLeftLabel.text = String(targetLeft)
         }
         
         NSLayoutConstraint.activate([
@@ -236,7 +254,10 @@ class GoalDetailedViewController: UIViewController {
             descriptionLabelText.topAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 24),
             descriptionLabelText.leadingAnchor.constraint(equalTo: descriptionContainerView.leadingAnchor, constant: 8),
             descriptionLabelText.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -8),
-            descriptionContainerView.bottomAnchor.constraint(equalTo: descriptionLabelText.bottomAnchor, constant: 8)
+            descriptionContainerView.bottomAnchor.constraint(equalTo: descriptionLabelText.bottomAnchor, constant: 8),
+            
+            targetLeftLabel.trailingAnchor.constraint(equalTo: descriptionContainerView.trailingAnchor, constant: -8),
+            targetLeftLabel.topAnchor.constraint(equalTo: descriptionContainerView.topAnchor, constant: 8)
         ])
     }
     
@@ -250,13 +271,24 @@ class GoalDetailedViewController: UIViewController {
             updateValueTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
+    
+    private func fetchGoal(with uuid: UUID) -> Goal? {
+        let goals = DBController.shared.readGoalTable()
+        for goal in goals {
+            if goal.uuid == uuid {
+                let fetchedGoal = goal
+                return fetchedGoal
+            }
+        }
+        print("No goals found with UUID: \(uuid)")
+        return nil
+    }
 }
 
-// MARK: - Extensions
+// MARK: - extensions
 extension GoalDetailedViewController: UpdateGoalDelegate {
-    func setUpdatedGoal(with goal: Goal) {
-        selectedGoal = goal
+    func didUpdateGoal(updatedGoal goal: Goal) {
+        progressLabel.text = String(goal.progress)
+        targetLeftLabel.text = String(goal.targetLeft)
     }
-    
-    
 }

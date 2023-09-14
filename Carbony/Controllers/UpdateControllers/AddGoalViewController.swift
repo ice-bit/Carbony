@@ -37,7 +37,7 @@ class AddGoalViewController: UIViewController {
               }
         
         let newUUID = UUID()
-        let newGoal = Goal(uuid: newUUID, target: target, targetLeft: target, progress: 0.0, description: description)
+        let newGoal = Goal(uuid: newUUID, target: target, targetLeft: target, progress: 0, description: description)
         print("UUID: \(newGoal.uuid)")
         displayGoalObj(uuid: newGoal.uuid, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
@@ -62,7 +62,7 @@ class AddGoalViewController: UIViewController {
         navigationItem.leftBarButtonItem = cancelButton
     }
     
-    private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Double, description: String) {
+    private func displayGoalObj(uuid: UUID, target: Int, targetLeft: Int, progress: Int, description: String) {
         print("Goal\nUUID: \(uuid), Target: \(target), TargetLeft: \(targetLeft), Progress: \(progress), Description: \(description)")
     }
     

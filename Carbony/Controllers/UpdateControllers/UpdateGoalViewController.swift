@@ -6,14 +6,14 @@
 //
 
 import UIKit
-
 protocol UpdateGoalDelegate {
-    func setUpdatedGoal(with goal: Goal)
+    func didUpdateGoal(updatedGoal goal: Goal)
 }
 
 class UpdateGoalViewController: UIViewController {
     // MARK: - Properties and UIElements
     var selectedGoal: Goal?
+    
     var delegate: UpdateGoalDelegate?
     
     let inputTextField: UITextField = {
@@ -58,23 +58,32 @@ class UpdateGoalViewController: UIViewController {
     }
     
     @objc private func updateButtonAction() {
-        // TODO: - Update goaland update goal in table
+        // TODO: Update goal and update goal in table
+        /// dumbass check the flow you should post to the db here and fetch the data in the detailView Controller!
         print("Update button tapped")
-        if let inputText = inputTextField.text,
-           let inputValue = Int(inputText) {
-            if let goal = selectedGoal {
-                let updatedGoal = updateGoal(for: goal, with: inputValue)
-//                print("Updated Goal: Goal(uuid: \(updatedGoal.uuid), target: \(updatedGoal.target), targetLeft: \(updatedGoal.targetLeft), progress: \(updatedGoal.progress), description: \(updatedGoal.description))")
-                
-                DBController.shared.updateGoal(uuid: updatedGoal.uuid.uuidString, newProgress: updatedGoal.progress, newTargetLeft: updatedGoal.targetLeft)
-                // calling the delegate func
-                delegate?.setUpdatedGoal(with: updatedGoal)
-                let fetchUpdatedGoal = DBController.shared.readGoal(withUUID: updatedGoal.uuid.uuidString)
-                print("Updated goal: UUID: \(fetchUpdatedGoal?.uuid), newProgress: \(fetchUpdatedGoal?.progress)")
-             }
+        guard let goalProgress = selectedGoal?.progress, goalProgress < 100 else {
+            progressCompletionAlert()
+            return
         }
         
-        self.dismiss(animated: true)
+        if let inputText = inputTextField.text,
+           let inputValue = Int(inputText) {
+            if inputValue >= 0 {
+                if let goal = selectedGoal {
+                    let updatedGoal = updateGoal(for: goal, with: inputValue)
+                    DBController.shared.updateGoal(uuid: updatedGoal.uuid.uuidString, newProgress: updatedGoal.progress, newTargetLeft: updatedGoal.targetLeft)
+                    delegate?.didUpdateGoal(updatedGoal: updatedGoal)
+                    self.dismiss(animated: true)
+                } else {
+                    print("Couldn't unwrap goal from selectedGoal")
+                }
+                self.dismiss(animated: true)
+            } else {
+                displayErrorMessage("Invalid input. Please enter a valid number.")
+            }
+        } else {
+            displayErrorMessage("Invalid input. Please enter a valid whole number.")
+        }
     }
     
     // MARK: - Private methods
@@ -105,18 +114,37 @@ class UpdateGoalViewController: UIViewController {
     }
     
     // MARK: - Public methods
-    func updateGoal(for goal: Goal, with value: Int) -> Goal {
-        let currentProgress = goal.progress
-        let totalTarget = goal.target
-        let targetLeft = goal.targetLeft
-        let precentageProgress = Double(currentProgress) / Double(totalTarget)
-        let newPercentageProgress = precentageProgress + (Double(value) / Double(totalTarget))
+    func updateGoal(for goal: Goal, with reducedEmissionValue: Int) -> Goal {
+        let totalTarget = Double(goal.target)
+        let targetLeft = Double(goal.targetLeft)
+        let currentProgress: Double = ((totalTarget - targetLeft ) / totalTarget) * 100.0
+        let newProgress: Double = Double(reducedEmissionValue) / Double(totalTarget) * 100.0
+        let clampedProgress = min(max(newProgress + currentProgress, 0), 100)
+    
+        let newTargetLeft = max(Int(targetLeft) - reducedEmissionValue, 0)
         
-        let clampedPercentage = min(max(newPercentageProgress, 0), 1.0)
-        let remainingTarget = max(targetLeft - value, 0)
-        
-        let updatedGoal = Goal(uuid: goal.uuid, target: goal.target, targetLeft: remainingTarget, progress: clampedPercentage, description: goal.description)
+        let updatedGoal = Goal(uuid: goal.uuid, target: goal.target, targetLeft: newTargetLeft, progress: Int(clampedProgress), description: goal.description)
         
         return updatedGoal
+    }
+    
+    // MARK: - private methods
+    private func displayErrorMessage(_ message: String) {
+        // You can implement a UIAlert or other UI to display the error message to the user
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+    
+    private func progressCompletionAlert() {
+        let alertController = UIAlertController(title: "Progress already 100%", message: "You cannot update the progress because it's already at 100%.", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .default) { [weak self] _  in
+            self?.dismiss(animated: true)
+        }
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
     }
 }
