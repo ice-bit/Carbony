@@ -273,7 +273,7 @@ class GoalDetailedViewController: UIViewController {
     }
     
     private func fetchGoal(with uuid: UUID) -> Goal? {
-        let goals = DBController.shared.readGoalTable()
+        let goals = DBController.shared.fetchGoals()
         for goal in goals {
             if goal.uuid == uuid {
                 let fetchedGoal = goal

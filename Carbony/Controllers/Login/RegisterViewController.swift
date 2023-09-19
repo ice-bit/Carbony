@@ -23,9 +23,9 @@ class RegisterViewController: UIViewController {
         setupCancelButton()
     }
     
-    private func registerForKeyboardNotifications() {
+    /*private func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
+    }*/
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         guard let username = usernameTextField.text,
@@ -58,12 +58,12 @@ class RegisterViewController: UIViewController {
         registerButton.layer.cornerRadius = 8
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
+   /* @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
-//            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            //let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
             
             
         }
-    }
+    }*/
 
 }

@@ -9,17 +9,18 @@ import UIKit
 
 class GoalViewController: UIViewController {
     
-    // MARK: - Outlets adn properties
+    // MARK: - Outlets and properties
     @IBOutlet weak var goalTableView: UITableView!
     
-    var footprints: [Footprint] = []
+    var footprints: [CarbonFootprint] = []
     
     var goals: [Goal] = []
-    var isSectionZeroVisible: Bool = true
-    var isSectionOneVisibile: Bool = true
     var visibleGoals: [Goal] = []
     
-    var isExpanded: Bool = false
+    var isSectionZeroVisible: Bool = true
+    var isSectionOneVisibile: Bool = true
+    
+//    var isExpanded: Bool = false
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -30,8 +31,8 @@ class GoalViewController: UIViewController {
         goalTableView.separatorStyle = .none
         
         DBController.shared.createGoalsTable()
-        DBController.shared.printAllDetailsFromDatabase()
-        goals = DBController.shared.readGoalTable()
+//        DBController.shared.displayGoals()
+        goals = DBController.shared.fetchGoals()
         visibleGoals = goals.reversed()
         
         NotificationCenter.default.addObserver(self, selector: #selector(addGoal(notification:)), name: Notification.Name("AddGoalNotification"), object: nil)
@@ -40,7 +41,7 @@ class GoalViewController: UIViewController {
    override func viewWillAppear(_ animated: Bool) {
        print(#function)
         super.viewWillAppear(animated)
-        goals = DBController.shared.readGoalTable()
+        goals = DBController.shared.fetchGoals()
         visibleGoals = goals.reversed()
         goalTableView.reloadData()
     }
@@ -53,7 +54,7 @@ class GoalViewController: UIViewController {
     // MARK: - OBJC methods
     @objc private func addGoal(notification: Notification) {
         if let newGoal = notification.object as? Goal {
-            DBController.shared.printAllDetailsFromDatabase()
+            DBController.shared.displayGoals()
             goals.append(newGoal)
             visibleGoals = goals.reversed()
             
@@ -186,13 +187,15 @@ extension GoalViewController: GoalSectionHeaderViewDelegate {
     // action for add button in add goals section header
     func addButtonTapped(inSection section: Int) {
         if section == 0 {
-            print("Present addGoal controller.")
+            //print("Present addGoal controller.")
             let addGoalViewController = AddGoalViewController()
             let rootViewController = UINavigationController(rootViewController: addGoalViewController)
             // present
             self.present(rootViewController, animated: true)
         } else {
-            print("Present addFootprint controller.")
+            //print("Present addFootprint controller.")
+            let calculateVC = CalculateViewController()
+            self.navigationController?.pushViewController(calculateVC, animated: true)
         }
     }
 }

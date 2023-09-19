@@ -38,13 +38,4 @@ class AuthCustomView: UIView {
             authButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -298)
         ])
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

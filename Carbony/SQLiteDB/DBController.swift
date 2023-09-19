@@ -47,6 +47,24 @@ public final class DBController {
         sqlite3_finalize(createTableStatement)
     }
     
+    public func createFootprintTable() {
+        let createTableQuery = """
+        QUERY goes here
+        """
+        
+        var createTableStatment: OpaquePointer?
+        
+        if sqlite3_prepare_v2(db, createTableQuery, -1, &createTableStatment, nil) == SQLITE_OK {
+            if sqlite3_step(createTableStatment) == SQLITE_DONE {
+                print("Footprint table created successfully")
+            } else {
+                print("Footprint table could not be created")
+            }
+        } else {
+            print("CREATE TABLE statement could not be prepared")
+        }
+    }
+    
     public func insertInto(uuid: String, target: Int, targetLeft: Int, progress: Int, description: String) {
         let insertQuery = """
             INSERT INTO \(tableName) (uuid, target, targetLeft, progress, description)
@@ -66,7 +84,7 @@ public final class DBController {
         sqlite3_finalize(insertStatement)
     }
     
-    func readGoalTable() -> [Goal] {
+    func fetchGoals() -> [Goal] {
         let queryStatementString: String = "SELECT * FROM \(tableName);"
         var queryStatement: OpaquePointer? 
         var goals: [Goal] = []
@@ -78,15 +96,16 @@ public final class DBController {
                 let targetLeft = sqlite3_column_int(queryStatement, 2)
                 let progress = sqlite3_column_int(queryStatement, 3)
                 let description = String(cString: sqlite3_column_text(queryStatement, 4))
-                print("UUID String: \(uuidString)")
-                print("Target: \(target)")
+                // uncommet these print statements when it is necessary
+                /*print("UUID String: \(uuidString)")
+                print("Target: \(target)")*/
                 
                 if let uuid = UUID(uuidString: uuidString) {
                     let goal = Goal(uuid: uuid, target: Int(target), targetLeft: Int(targetLeft), progress: Int(progress), description: description)
                     goals.append(goal)
                     
-                    print("Query result:")
-                    print("\(uuidString) | \(target) | \(targetLeft) | \(progress) | \(description)")
+                    /*print("Query result:")
+                    print("\(uuidString) | \(target) | \(targetLeft) | \(progress) | \(description)")*/
                 } else {
                     print("Error converting uuidString value into UUID")
                 }
@@ -99,7 +118,7 @@ public final class DBController {
         return goals
     }
     
-    func printAllDetailsFromDatabase() {
+    func displayGoals() {
         let queryStatementString = "SELECT * FROM \(tableName);"
         var queryStatement: OpaquePointer? = nil
         
