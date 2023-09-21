@@ -17,7 +17,7 @@ class GoalSectionHeaderView: UIView {
     
     weak var delegate: GoalSectionHeaderViewDelegate?
     
-//    var isExpanded: Bool = false
+    /*var isExpanded: Bool = false
     var isToggleCellButtonTapped = false {
         didSet {
             toggleCellVisibilityButton.setImage(isToggleCellButtonTapped ? tappedToggleImage : initialToggleImage, for: .normal)
@@ -25,7 +25,7 @@ class GoalSectionHeaderView: UIView {
     }
     
     let initialToggleImage = UIImage(systemName: "chevron.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
-    let tappedToggleImage = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+    let tappedToggleImage = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))*/
 
     let headerLabel: UILabel = {
         let label = UILabel()
@@ -91,7 +91,7 @@ class GoalSectionHeaderView: UIView {
     
     @objc private func toggleCellButtonTapped() {
         print("Button tapped: \(toggleCellVisibilityButton.titleLabel?.text ?? "ToggleCellVisibility ")")
-        isToggleCellButtonTapped.toggle()
+        //isToggleCellButtonTapped.toggle()
         delegate?.toggleButtonTapped(inSection: tag)
     }
     

@@ -51,6 +51,7 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Add">
+                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
                         <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
                     </buttonConfiguration>
                     <connections>

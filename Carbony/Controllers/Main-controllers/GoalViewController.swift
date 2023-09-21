@@ -132,7 +132,7 @@ extension GoalViewController: UITableViewDelegate {
         } else {
             customHeaderView.headerLabel.text = "Footprints"
         }
-        customHeaderView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.85)
+        customHeaderView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.92)
         return customHeaderView
     }
     
@@ -195,7 +195,8 @@ extension GoalViewController: GoalSectionHeaderViewDelegate {
         } else {
             //print("Present addFootprint controller.")
             let calculateVC = CalculateViewController()
-            self.navigationController?.pushViewController(calculateVC, animated: true)
+            let rootVC = UINavigationController(rootViewController: calculateVC)
+            self.present(rootVC, animated: true)
         }
     }
 }

@@ -17,20 +17,18 @@ class UpdateGoalViewController: UIViewController {
     var delegate: UpdateGoalDelegate?
     
     let inputTextField: UITextField = {
-        let textField = UITextField()
+        let textField = CFTextField()
         textField.placeholder = "Progress value"
         textField.clearsOnBeginEditing = true
-        textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     let updateButton: UIButton = {
-       let button = UIButton()
-        button.backgroundColor = .label
-        button.layer.cornerRadius = 8
+        let button = CFCustomButton()
         button.setTitle("Update", for: .normal)
-        button.setTitleColor(.systemBackground, for: .normal)
+        button.customBackgroundColor = UIColor.label
+        button.customTextColor = UIColor.systemBackground
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

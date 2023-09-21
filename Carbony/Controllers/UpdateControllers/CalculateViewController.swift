@@ -9,6 +9,9 @@ import UIKit
 
 class CalculateViewController: UIViewController {
     // MARK: Properties
+    var regularConstraints: [NSLayoutConstraint] = []
+    var compactConstraints: [NSLayoutConstraint] = []
+    
     let resultContainerView: UIView = {
         let view = UIView()
         //view.backgroundColor = .cyan
@@ -35,31 +38,80 @@ class CalculateViewController: UIViewController {
     
     let textFieldStackView: UIStackView = {
        let stackView = UIStackView()
-        stackView.backgroundColor = .cyan
+//        stackView.backgroundColor = .cyan
         stackView.spacing = 8
-        stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    let typeSelectionTextField: UITextField = {
+        let textField = CFTextField()
+        textField.placeholder = "Choose a type"
+        return textField
+    }()
+    
+    let distanceTravelledTextField: UITextField = {
+        let textField = CFTextField()
+        textField.placeholder = "Km travelled"
+        return textField
+    }()
+    
+    let vehicleEfficienyTextField: UITextField = {
+        let textField = CFTextField()
+        textField.placeholder = "Vehicle efficiency"
+        return textField
+    }()
+    
+    let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        //stackView.backgroundColor = .black
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let calculateButton: UIButton = {
+        let button = CFCustomButton()
+        button.setTitle("Calculate", for: .normal)
+        return button
+    }()
 
+    let addFootprintButton: UIButton = {
+        let button = CFCustomButton()
+        button.customBackgroundColor = UIColor.label
+        button.setTitle("Add Footprint", for: .normal)
+        button.customTextColor = UIColor.systemBackground
+        return button
+    }()
+    
     // MARK: - View lifecylce methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Calculate Footprint"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        //setupCancelButton()
+        setupCancelButton()
         setupAndActivateContraints()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if size.width > size.height {
-            print("Landscape")
-            setupAndActivateContraints()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        NSLayoutConstraint.deactivate(compactConstraints)
+        NSLayoutConstraint.deactivate(regularConstraints)
+        
+        if self.traitCollection.verticalSizeClass == .compact {
+            print("hC")
+            NSLayoutConstraint.activate(compactConstraints)
+        } else if self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular {
+            print("wR & hR")
         } else {
-            print("Portrait")
+            print("hW, wR & hR, anything other than this")
+            NSLayoutConstraint.activate(regularConstraints)
         }
     }
     
@@ -79,34 +131,49 @@ class CalculateViewController: UIViewController {
         resultContainerView.addSubview(resultLabel)
         resultContainerView.addSubview(resultUnitLabel)
         view.addSubview(textFieldStackView)
+        textFieldStackView.addArrangedSubview(typeSelectionTextField)
+        textFieldStackView.addArrangedSubview(distanceTravelledTextField)
+        textFieldStackView.addArrangedSubview(vehicleEfficienyTextField)
+        view.addSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(calculateButton)
+        buttonStackView.addArrangedSubview(addFootprintButton)
+        
+        regularConstraints = [
+            // TopResultContainer
+            resultContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            resultContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            resultContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            resultContainerView.heightAnchor.constraint(equalToConstant: 98),
+            
+            // resultLabel constraints
+            resultLabel.leadingAnchor.constraint(equalTo: resultContainerView.leadingAnchor, constant: 8),
+            resultLabel.topAnchor.constraint(equalTo: resultContainerView.topAnchor, constant: 8),
+            
+            // resultLabel constraints
+            resultUnitLabel.leadingAnchor.constraint(equalTo: resultLabel.trailingAnchor, constant: 2),
+            resultUnitLabel.bottomAnchor.constraint(equalTo: resultContainerView.bottomAnchor, constant: -26),
+            
+            // textFieldStackView constraints
+            textFieldStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 31),
+            textFieldStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -31),
+            textFieldStackView.topAnchor.constraint(equalTo: resultContainerView.bottomAnchor, constant: 0),
+            textFieldStackView.heightAnchor.constraint(equalToConstant: 204),
+            
+            // button stackView constraints
+            buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 31),
+            buttonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -31),
+            buttonStackView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: 44),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 49)
+        ]
         
         if self.traitCollection.verticalSizeClass == .compact {
-            print("hW")
+            print("hC")
+            NSLayoutConstraint.activate(compactConstraints)
         } else if self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular {
             print("wR & hR")
         } else {
             print("hW, wR & hR, anything other than this")
-            NSLayoutConstraint.activate([
-                // TopResultContainer
-                resultContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                resultContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-                resultContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-                resultContainerView.heightAnchor.constraint(equalToConstant: 98),
-                
-                // resultLabel constraints
-                resultLabel.leadingAnchor.constraint(equalTo: resultContainerView.leadingAnchor, constant: 8),
-                resultLabel.topAnchor.constraint(equalTo: resultContainerView.topAnchor, constant: 8),
-                
-                // resultLabel constraints
-                resultUnitLabel.leadingAnchor.constraint(equalTo: resultLabel.trailingAnchor, constant: 2),
-                resultUnitLabel.bottomAnchor.constraint(equalTo: resultContainerView.bottomAnchor, constant: -26),
-                
-                // textFieldStackView constraints
-                textFieldStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 31),
-                textFieldStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -31),
-                textFieldStackView.topAnchor.constraint(equalTo: resultContainerView.bottomAnchor, constant: 0),
-                textFieldStackView.heightAnchor.constraint(equalToConstant: 204)
-            ])
+            NSLayoutConstraint.activate(regularConstraints)
         }
     }
 }

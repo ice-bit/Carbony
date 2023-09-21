@@ -14,10 +14,42 @@
             filePath = "Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "updateGoal(for:with:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4B6EDF77-A4DF-4948-939F-3FF2420FD24B - 9c45cdc1572a76b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Carbony.UpdateGoalViewController.updateGoal(for: Carbony.Goal, with: Swift.Int) -&gt; Carbony.Goal"
+                  moduleName = "Carbony"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "1576">
+               </Location>
+               <Location
+                  uuid = "4B6EDF77-A4DF-4948-939F-3FF2420FD24B - 9c45cdc1572a7694"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Carbony.UpdateGoalViewController.updateGoal(for: Carbony.Goal, with: Swift.Int) -&gt; Carbony.Goal"
+                  moduleName = "Carbony"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doss-zstch1212/Developer/Xcode/Garage/Carbony/Carbony/Controllers/UpdateControllers/UpdateGoalViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1576">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

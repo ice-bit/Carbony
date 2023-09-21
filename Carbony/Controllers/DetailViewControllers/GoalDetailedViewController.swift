@@ -14,23 +14,17 @@ class GoalDetailedViewController: UIViewController {
     
     // MARK: - UIComponents initializatiion
     let calculateButton: UIButton = {
-        let button = UIButton()
+        let button = CFCustomButton()
         button.setTitle("Calculate", for: .normal)
-        button.layer.cornerRadius = 8
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0.855, green: 0.855, blue: 0.855, alpha: 1).cgColor
-        button.backgroundColor = .systemFill
-        button.setTitleColor(.label, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let updateButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 8
+        let button = CFCustomButton()
         button.setTitle("Update", for: .normal)
-        button.backgroundColor = .label
-        button.setTitleColor(.systemBackground, for: .normal)
+        button.customBackgroundColor = .label
+        button.customTextColor = .systemBackground
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -73,7 +67,8 @@ class GoalDetailedViewController: UIViewController {
     
     let descriptionContainerView: UIView = {
         let containerView = UIView()
-        containerView.backgroundColor = UIColor.systemGray6
+        //containerView.backgroundColor = UIColor.systemGray6
+        containerView.backgroundColor = UIColor(named: "CustomMainBackgroundColor") ?? UIColor.systemGray6
         containerView.layer.cornerRadius = 8
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor(red: 0.855, green: 0.855, blue: 0.855, alpha: 1).cgColor
@@ -157,8 +152,8 @@ class GoalDetailedViewController: UIViewController {
     @objc private func calculateButtonAction() {
         print("Calculate button tapped")
         let calculateViewController = CalculateViewController()
-        let rootViewController = UINavigationController(rootViewController: calculateViewController)
-        self.present(rootViewController, animated: true)
+        let rootVC = UINavigationController(rootViewController: calculateViewController)
+        self.present(rootVC, animated: true)
     }
     
     
