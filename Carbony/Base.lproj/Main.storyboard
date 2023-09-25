@@ -717,6 +717,7 @@
                         <outlet property="forgotPasswordLabel" destination="bjs-iD-6DC" id="RmC-FE-w7b"/>
                         <outlet property="loginButton" destination="ZqN-zX-IHK" id="jir-ue-JVu"/>
                         <outlet property="passwordTextField" destination="ggt-F5-JbF" id="lcc-Si-Fnv"/>
+                        <outlet property="registerLabel" destination="kBT-Hf-Dye" id="zd1-QT-USe"/>
                         <outlet property="usernameTextField" destination="RWB-d3-9gU" id="Y8v-83-h8o"/>
                     </connections>
                 </viewController>
@@ -1180,7 +1181,7 @@
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="leaf" catalog="system" width="128" height="111"/>
         <namedColor name="CustomMainBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

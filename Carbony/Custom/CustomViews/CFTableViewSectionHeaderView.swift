@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SummaryTableSecHeaderView: UIView {
+class CFTableViewSectionHeaderView: UIView {
     var customTitle: String = "Title" {
         didSet {
             titleLabel.text = customTitle

@@ -12,6 +12,14 @@ class CalculateViewController: UIViewController {
     var regularConstraints: [NSLayoutConstraint] = []
     var compactConstraints: [NSLayoutConstraint] = []
     
+    let typeSegementController: UISegmentedControl = {
+        let segmentController = UISegmentedControl(items: ["Driving", "Electricity"])
+        /*segmentController.setTitle("Driving", forSegmentAt: 0)
+        segmentController.setTitle("Electricity", forSegmentAt: 1)*/
+        segmentController.translatesAutoresizingMaskIntoConstraints = false
+        return segmentController
+    }()
+    
     let resultContainerView: UIView = {
         let view = UIView()
         //view.backgroundColor = .cyan
@@ -137,12 +145,21 @@ class CalculateViewController: UIViewController {
         view.addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(calculateButton)
         buttonStackView.addArrangedSubview(addFootprintButton)
+        view.addSubview(typeSegementController)
+        
+       /* if typeSegementController.selectedSegmentIndex == 0 {
+            vehicleEfficienyTextField.text = "Eureka"
+        }*/
         
         regularConstraints = [
+            // segment controller constraints
+            typeSegementController.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            typeSegementController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            
             // TopResultContainer
             resultContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             resultContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            resultContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            resultContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             resultContainerView.heightAnchor.constraint(equalToConstant: 98),
             
             // resultLabel constraints

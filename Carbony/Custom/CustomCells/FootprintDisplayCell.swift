@@ -10,6 +10,12 @@ import UIKit
 class FootprintDisplayCell: UITableViewCell {
     static let reuseIdentifier: String = "FootprintDisplayCell"
     
+    var customTitleValue: String = "" {
+        didSet {
+            carbonFootprintLabel.text = customTitleValue
+        }
+    }
+    
     let carbonFootprintLabel: UILabel = {
         let label = UILabel()
         label.text = "9.41"

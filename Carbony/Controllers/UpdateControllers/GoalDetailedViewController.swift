@@ -132,7 +132,6 @@ class GoalDetailedViewController: UIViewController {
                 
                 updateViewController.delegate = self
                 updateViewController.selectedGoal = fetchedGoal
-                
                 let nav = UINavigationController(rootViewController: updateViewController)
                 nav.modalPresentationStyle = .pageSheet
                 if let sheet = nav.sheetPresentationController {

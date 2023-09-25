@@ -17,12 +17,15 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var forgotPasswordLabel: UILabel!
     
+    @IBOutlet weak var registerLabel: UILabel!
+    
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLoginButton()
         setupResetPasswordLabel()
+        addActionForRegisterLabel()
 //        setupCancelButton()
     }
     
@@ -54,6 +57,19 @@ class LoginViewController: UIViewController {
     private func setupCancelButton() {
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    private func addActionForRegisterLabel() {
+        let registerLabelAction = UITapGestureRecognizer(target: self, action: #selector(registerLabelAction))
+        registerLabel.isUserInteractionEnabled = true
+        registerLabel.addGestureRecognizer(registerLabelAction)
+    }
+    
+    @objc private func registerLabelAction() {
+        print("register label tapped")
+        let registerVC = storyboard?.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
+        let rootVC = UINavigationController(rootViewController: registerVC)
+        self.present(rootVC, animated: true)
     }
     
     @objc private func cancelButtonTapped() {

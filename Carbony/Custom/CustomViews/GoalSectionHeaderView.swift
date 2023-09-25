@@ -60,7 +60,7 @@ class GoalSectionHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupHeaderUI()
+//        setupHeaderUI()
     }
     
     private func setupHeaderUI() {

@@ -50,12 +50,12 @@ extension SummaryViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let summaryHeaderView = SummaryTableSecHeaderView()
+            let summaryHeaderView = CFTableViewSectionHeaderView()
             summaryHeaderView.customTitle = "Summary"
             summaryHeaderView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.92)
             return summaryHeaderView
         } else if section == 1 {
-            let progressHeaderView = SummaryTableSecHeaderView()
+            let progressHeaderView = CFTableViewSectionHeaderView()
             progressHeaderView.customTitle = "Progress"
             progressHeaderView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.92)
             return progressHeaderView
