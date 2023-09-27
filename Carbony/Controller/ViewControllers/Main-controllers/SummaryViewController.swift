@@ -22,6 +22,7 @@ class SummaryViewController: UIViewController {
         summaryTableView.register(GraphDemoTableViewCell.self, forCellReuseIdentifier: GraphDemoTableViewCell.reuseIdentifier)
         
         summaryTableView.separatorStyle = .none
+        summaryTableView.allowsSelection = false
         
         summaryTableView.delegate = self
         summaryTableView.dataSource = self

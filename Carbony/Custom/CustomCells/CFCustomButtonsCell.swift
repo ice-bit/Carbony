@@ -7,8 +7,20 @@
 
 import UIKit
 
-class CarbonTradeCellTableViewCell: UITableViewCell {
+class CFCustomButtonsCell: UITableViewCell {
     static let reuseIdentifier: String = "CarbonTradeCellTableViewCell"
+    
+    var customLightButtonTitle: String = "" {
+        didSet {
+            sellButton.setTitle(customLightButtonTitle, for: .normal)
+        }
+    }
+    
+    var customDarkButtonTitle: String = "" {
+        didSet {
+            buyButton.setTitle(customDarkButtonTitle, for: .normal)
+        }
+    }
     
     let sellButtonWrapper: UIView = {
         let view = UIView()
@@ -22,6 +34,19 @@ class CarbonTradeCellTableViewCell: UITableViewCell {
         return view
     }()
     
+    let buyButton: CFCustomButton = {
+        let buyButton = CFCustomButton()
+        buyButton.customBackgroundColor = .label
+        buyButton.customTextColor = .systemBackground
+        buyButton.translatesAutoresizingMaskIntoConstraints = false
+        return buyButton
+    }()
+    
+    let sellButton: CFCustomButton = {
+        let sellButton = CFCustomButton()
+        sellButton.translatesAutoresizingMaskIntoConstraints = false
+        return sellButton
+    }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupButtons()
@@ -44,16 +69,6 @@ class CarbonTradeCellTableViewCell: UITableViewCell {
     }
     
     private func setupButtons() {
-        let sellButton = CFCustomButton()
-        sellButton.setTitle("Sell", for: .normal)
-        sellButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        let buyButton = CFCustomButton()
-        buyButton.setTitle("Buy", for: .normal)
-        buyButton.customBackgroundColor = .label
-        buyButton.customTextColor = .systemBackground
-        buyButton.translatesAutoresizingMaskIntoConstraints = false
-        
         contentView.addSubview(sellButtonWrapper)
         contentView.addSubview(buyButtonWrapper)
         sellButtonWrapper.addSubview(sellButton)

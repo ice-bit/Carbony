@@ -180,6 +180,8 @@ extension GoalViewController: GoalSectionHeaderViewDelegate {
         } else if section == 1 {
             isSectionOneVisibile.toggle()
         }
+        
+        goalTableView.reloadData()
     }
     
     // action for add button in add goals section header
