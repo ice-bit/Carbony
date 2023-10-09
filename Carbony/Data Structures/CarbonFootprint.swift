@@ -8,13 +8,13 @@
 import Foundation
 
 class CarbonFootprint {
-    let id: UUID
+    let uuid: UUID
     let emissionValue: Double
-    let footprintType: ActivityType
+    let footprintType: String
     let date: Date
     
-    init(id: UUID, emissionValue: Double, footprintType: ActivityType, date: Date) {
-        self.id = id
+    init(uuid: UUID, emissionValue: Double, footprintType: String, date: Date) {
+        self.uuid = uuid
         self.emissionValue = emissionValue
         self.footprintType = footprintType
         self.date = date

@@ -17,6 +17,10 @@ class AddGoalViewController: UIViewController {
     
     @IBOutlet weak var calculateLabel: UILabel!
     
+    var reloadDelegate: DataReloadDelegate?
+    
+    var isSectionCollapsed: [Bool]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAddGoalButton()
@@ -41,11 +45,11 @@ class AddGoalViewController: UIViewController {
         print("UUID: \(newGoal.uuid)")
         displayGoalObj(uuid: newGoal.uuid, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
-        DBController.shared.insertInto(uuid: newGoal.uuid.uuidString, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
+        DBController.shared.insertIntoGoalTable(uuid: newGoal.uuid.uuidString, target: newGoal.target, targetLeft: newGoal.targetLeft, progress: newGoal.progress, description: newGoal.description)
         
-        NotificationCenter.default.post(name: Notification.Name("AddGoalNotification"), object: newGoal)
-        
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            self.reloadDelegate?.reloadGoalData()
+        }
     }
     
     private func setupLabelAction() {

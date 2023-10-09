@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EMP-6J-d7H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EMP-6J-d7H">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -66,27 +67,27 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="oMa-Wx-VML"/>
                                 <exclude reference="2ic-EF-GKD"/>
                                 <exclude reference="6bL-Kz-2d6"/>
                                 <exclude reference="I7h-lu-pbG"/>
-                                <exclude reference="oMa-Wx-VML"/>
                                 <exclude reference="rMB-yq-NEp"/>
                                 <exclude reference="7g9-pB-NNF"/>
-                                <exclude reference="IlU-wj-dwV"/>
                                 <exclude reference="Ne5-Vi-wyZ"/>
+                                <exclude reference="IlU-wj-dwV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="2ic-EF-GKD"/>
                                 <include reference="oMa-Wx-VML"/>
+                                <include reference="2ic-EF-GKD"/>
                                 <include reference="Ne5-Vi-wyZ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
                             <mask key="constraints">
-                                <include reference="2ic-EF-GKD"/>
                                 <include reference="oMa-Wx-VML"/>
+                                <include reference="2ic-EF-GKD"/>
                                 <include reference="Ne5-Vi-wyZ"/>
                             </mask>
                         </variation>
@@ -355,10 +356,10 @@
                                 <exclude reference="mRe-AR-882"/>
                                 <exclude reference="fvc-GE-CLX"/>
                                 <exclude reference="xiy-hj-bJW"/>
-                                <exclude reference="3iX-jo-jpL"/>
                                 <exclude reference="L4a-AB-MrL"/>
-                                <exclude reference="PQn-Dj-rl0"/>
                                 <exclude reference="avJ-M8-OeH"/>
+                                <exclude reference="PQn-Dj-rl0"/>
+                                <exclude reference="3iX-jo-jpL"/>
                                 <exclude reference="oMd-eV-rH3"/>
                             </mask>
                         </variation>
@@ -497,18 +498,18 @@
                             <mask key="constraints">
                                 <exclude reference="hNV-qZ-MTa"/>
                                 <exclude reference="vBI-jQ-0Ls"/>
-                                <exclude reference="fFb-Ph-cvN"/>
                                 <exclude reference="gra-Th-Qnf"/>
+                                <exclude reference="fFb-Ph-cvN"/>
                                 <exclude reference="U0c-bm-H0m"/>
                                 <exclude reference="bSU-Tm-XhF"/>
                                 <exclude reference="yrX-2t-4ge"/>
                                 <exclude reference="8bJ-k5-gL9"/>
                                 <exclude reference="Ib8-t8-mMz"/>
-                                <exclude reference="P9e-Fh-m7u"/>
-                                <exclude reference="aat-bb-sce"/>
-                                <exclude reference="mlj-fh-ISP"/>
                                 <exclude reference="oTe-dj-Asl"/>
+                                <exclude reference="aat-bb-sce"/>
                                 <exclude reference="xdy-Ia-a1n"/>
+                                <exclude reference="P9e-Fh-m7u"/>
+                                <exclude reference="mlj-fh-ISP"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -534,16 +535,16 @@
                                 <include reference="hNV-qZ-MTa"/>
                                 <include reference="fFb-Ph-cvN"/>
                                 <include reference="bSU-Tm-XhF"/>
-                                <include reference="P9e-Fh-m7u"/>
                                 <include reference="xdy-Ia-a1n"/>
+                                <include reference="P9e-Fh-m7u"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <include reference="bSU-Tm-XhF"/>
                                 <include reference="Ib8-t8-mMz"/>
-                                <include reference="P9e-Fh-m7u"/>
                                 <include reference="oTe-dj-Asl"/>
+                                <include reference="P9e-Fh-m7u"/>
                             </mask>
                         </variation>
                     </view>
@@ -807,10 +808,10 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Qs8-LU-E7O"/>
-                                <exclude reference="Qrr-P0-ki9"/>
                                 <exclude reference="WLn-GM-lkw"/>
-                                <exclude reference="c71-lZ-iPb"/>
                                 <exclude reference="j21-QP-FzF"/>
+                                <exclude reference="Qrr-P0-ki9"/>
+                                <exclude reference="c71-lZ-iPb"/>
                                 <exclude reference="yz0-MQ-8Cx"/>
                             </mask>
                         </variation>
@@ -838,8 +839,8 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <include reference="WLn-GM-lkw"/>
-                                <include reference="c71-lZ-iPb"/>
                                 <include reference="j21-QP-FzF"/>
+                                <include reference="c71-lZ-iPb"/>
                             </mask>
                         </variation>
                     </view>
@@ -1024,7 +1025,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Eco" id="LZs-PY-PrN"/>
                     <connections>
-                        <outlet property="goalTableView" destination="rRM-XI-e5w" id="RMw-Tt-Ykq"/>
+                        <outlet property="GoalAndFootprintTableView" destination="rRM-XI-e5w" id="qTR-Vu-xYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0At-TM-Oub" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1184,7 +1185,7 @@
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

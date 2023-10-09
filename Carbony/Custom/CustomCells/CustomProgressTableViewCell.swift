@@ -16,11 +16,11 @@ class CustomProgressTableViewCell: UITableViewCell {
         }
     }
     
-    var customProgressDisclosure: String = "941%" {
+    /*var customProgressDisclosure: String = "941%" {
         didSet {
             progressLabel.text = "\(customProgressDisclosure)%"
         }
-    }
+    }*/
     
     var customDetailIcon: UIImage = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .regular))! {
         didSet {

@@ -34,6 +34,11 @@
 		5581C4142AC20489004F090D /* CalculateInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581C4132AC20489004F090D /* CalculateInputTableViewCell.swift */; };
 		5581C4162AC2B2E8004F090D /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581C4152AC2B2E8004F090D /* TypeSelectionTableViewCell.swift */; };
 		5581C41A2AC41448004F090D /* CarbonFootprintController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581C4192AC41448004F090D /* CarbonFootprintController.swift */; };
+		558C33EA2AC58A120011EEDF /* Electricity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C33E92AC58A120011EEDF /* Electricity.swift */; };
+		558C33EC2AC598700011EEDF /* CustomTypePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C33EB2AC598700011EEDF /* CustomTypePickerTableViewCell.swift */; };
+		558C33EE2AC5A66D0011EEDF /* CalculateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C33ED2AC5A66D0011EEDF /* CalculateView.swift */; };
+		558C33F02AC5A81B0011EEDF /* SwiftUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C33EF2AC5A81B0011EEDF /* SwiftUIHostingController.swift */; };
+		558C33F42ACC185D0011EEDF /* FootprintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C33F32ACC185D0011EEDF /* FootprintTableViewCell.swift */; };
 		558F0CE32AAEE4F5007C3055 /* OffsetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558F0CE22AAEE4F5007C3055 /* OffsetViewController.swift */; };
 		558F0CEB2AB33EB2007C3055 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558F0CEA2AB33EB2007C3055 /* ActivityType.swift */; };
 		558F0CED2AB33EE5007C3055 /* ElectricitySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558F0CEC2AB33EE5007C3055 /* ElectricitySource.swift */; };
@@ -42,6 +47,7 @@
 		5598C4752A938A6F0072B6D3 /* AddGoalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5598C4732A938A6F0072B6D3 /* AddGoalViewController.xib */; };
 		5598C4782A938FE70072B6D3 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5598C4772A938FE70072B6D3 /* Goal.swift */; };
 		55A351622A9F1F6500EB4EC5 /* DBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A351612A9F1F6500EB4EC5 /* DBController.swift */; };
+		55B2C7812AC54C77006C5E46 /* ActivityFootprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2C7802AC54C77006C5E46 /* ActivityFootprint.swift */; };
 		55DE0F632A8F9F1E00E0B3DB /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE0F622A8F9F1E00E0B3DB /* GoalTableViewCell.swift */; };
 		55DE0F672A8FA8AE00E0B3DB /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE0F662A8FA8AE00E0B3DB /* GoalViewController.swift */; };
 		55FF68752A7CCABB003BF61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FF68742A7CCABB003BF61D /* AppDelegate.swift */; };
@@ -81,6 +87,11 @@
 		5581C4132AC20489004F090D /* CalculateInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateInputTableViewCell.swift; sourceTree = "<group>"; };
 		5581C4152AC2B2E8004F090D /* TypeSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		5581C4192AC41448004F090D /* CarbonFootprintController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarbonFootprintController.swift; sourceTree = "<group>"; };
+		558C33E92AC58A120011EEDF /* Electricity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Electricity.swift; sourceTree = "<group>"; };
+		558C33EB2AC598700011EEDF /* CustomTypePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTypePickerTableViewCell.swift; sourceTree = "<group>"; };
+		558C33ED2AC5A66D0011EEDF /* CalculateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateView.swift; sourceTree = "<group>"; };
+		558C33EF2AC5A81B0011EEDF /* SwiftUIHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHostingController.swift; sourceTree = "<group>"; };
+		558C33F32ACC185D0011EEDF /* FootprintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintTableViewCell.swift; sourceTree = "<group>"; };
 		558F0CE22AAEE4F5007C3055 /* OffsetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetViewController.swift; sourceTree = "<group>"; };
 		558F0CEA2AB33EB2007C3055 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
 		558F0CEC2AB33EE5007C3055 /* ElectricitySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricitySource.swift; sourceTree = "<group>"; };
@@ -91,6 +102,7 @@
 		55A3515B2A9F0E5B00EB4EC5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		55A3515C2A9F0E5B00EB4EC5 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		55A351612A9F1F6500EB4EC5 /* DBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBController.swift; sourceTree = "<group>"; };
+		55B2C7802AC54C77006C5E46 /* ActivityFootprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFootprint.swift; sourceTree = "<group>"; };
 		55DE0F622A8F9F1E00E0B3DB /* GoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
 		55DE0F662A8FA8AE00E0B3DB /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		55FF68712A7CCABB003BF61D /* Carbony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carbony.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				553A960C2AA9D07100ACFA56 /* UpdateView */,
+				558C33ED2AC5A66D0011EEDF /* CalculateView.swift */,
+				558C33EF2AC5A81B0011EEDF /* SwiftUIHostingController.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -197,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				558F0CE92AB33EA1007C3055 /* Types */,
+				55B2C7802AC54C77006C5E46 /* ActivityFootprint.swift */,
+				558C33E92AC58A120011EEDF /* Electricity.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -277,6 +293,8 @@
 				5517C6CF2AC08DD60032B086 /* CFCustomButtonsCell.swift */,
 				5581C4132AC20489004F090D /* CalculateInputTableViewCell.swift */,
 				5581C4152AC2B2E8004F090D /* TypeSelectionTableViewCell.swift */,
+				558C33EB2AC598700011EEDF /* CustomTypePickerTableViewCell.swift */,
+				558C33F32ACC185D0011EEDF /* FootprintTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -406,11 +424,15 @@
 				55FF688A2A7CCBD9003BF61D /* AuthenticationViewController.swift in Sources */,
 				554749F92A8E2CBE00972BFB /* SettingsViewController.swift in Sources */,
 				5517C6BC2ABADEE80032B086 /* CFCustomButton.swift in Sources */,
+				558C33EE2AC5A66D0011EEDF /* CalculateView.swift in Sources */,
 				55FF68752A7CCABB003BF61D /* AppDelegate.swift in Sources */,
 				558F0CED2AB33EE5007C3055 /* ElectricitySource.swift in Sources */,
 				5581C41A2AC41448004F090D /* CarbonFootprintController.swift in Sources */,
+				558C33EA2AC58A120011EEDF /* Electricity.swift in Sources */,
 				553A96092AA734DB00ACFA56 /* CalculateViewController.swift in Sources */,
 				553A95F52AA06C2E00ACFA56 /* GoalIDManager.swift in Sources */,
+				558C33EC2AC598700011EEDF /* CustomTypePickerTableViewCell.swift in Sources */,
+				558C33F02AC5A81B0011EEDF /* SwiftUIHostingController.swift in Sources */,
 				5527A16C2A7D0CD500C42C6B /* RegisterViewController.swift in Sources */,
 				5517C6C32ABC41780032B086 /* CFTableViewSectionHeaderView.swift in Sources */,
 				55DE0F632A8F9F1E00E0B3DB /* GoalTableViewCell.swift in Sources */,
@@ -422,6 +444,7 @@
 				558F0CE32AAEE4F5007C3055 /* OffsetViewController.swift in Sources */,
 				5517C6C12ABC2DA80032B086 /* FootprintDisplayCell.swift in Sources */,
 				5517C6CC2ABDC2450032B086 /* CCreditTableViewCell.swift in Sources */,
+				55B2C7812AC54C77006C5E46 /* ActivityFootprint.swift in Sources */,
 				554749F62A8D040200972BFB /* SummaryViewController.swift in Sources */,
 				5507C4922A86666300CFB476 /* UIViewController+Alert.swift in Sources */,
 				55FF68772A7CCABB003BF61D /* SceneDelegate.swift in Sources */,
@@ -438,6 +461,7 @@
 				5517C6C92ABC57220032B086 /* GraphDemoTableViewCell.swift in Sources */,
 				55DE0F672A8FA8AE00E0B3DB /* GoalViewController.swift in Sources */,
 				55A351622A9F1F6500EB4EC5 /* DBController.swift in Sources */,
+				558C33F42ACC185D0011EEDF /* FootprintTableViewCell.swift in Sources */,
 				5517C6BA2ABADB3D0032B086 /* CFTextField.swift in Sources */,
 				558F0CEB2AB33EB2007C3055 /* ActivityType.swift in Sources */,
 				553A95F72AA0BC0100ACFA56 /* CarbonFootprint.swift in Sources */,

@@ -153,6 +153,8 @@ class GoalDetailedViewController: UIViewController {
         let calculateViewController = CalculateViewController()
         let rootVC = UINavigationController(rootViewController: calculateViewController)
         self.present(rootVC, animated: true)
+        /*let hostingController = SwiftUIHostingController(rootView: )
+        self.present(hostingController, animated: true)*/
     }
     
     
@@ -267,15 +269,20 @@ class GoalDetailedViewController: UIViewController {
     }
     
     private func fetchGoal(with uuid: UUID) -> Goal? {
-        let goals = DBController.shared.fetchGoals()
-        for goal in goals {
-            if goal.uuid == uuid {
-                let fetchedGoal = goal
-                return fetchedGoal
+        var matchingGoal: Goal?
+        DBController.shared.fetchGoals { incomingGoals, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if let fetchedGoals = incomingGoals {
+                for goal in fetchedGoals {
+                    if goal.uuid == uuid {
+                        matchingGoal = goal
+                    }
+                }
             }
         }
-        print("No goals found with UUID: \(uuid)")
-        return nil
+        
+        return matchingGoal
     }
 }
 

@@ -10,75 +10,70 @@ import UIKit
 class GoalViewController: UIViewController {
     
     // MARK: - Outlets and properties
-    @IBOutlet weak var goalTableView: UITableView!
+    @IBOutlet weak var GoalAndFootprintTableView: UITableView!
     
-    var footprints: [CarbonFootprint] = []
+    var footprintsData: [CarbonFootprint] = [] /// - SeeAlso `fetchFootprintsData()`
     
-    var goals: [Goal] = []
-    var visibleGoals: [Goal] = []
+    var isSectionCollapsed: [Bool] = [false, false]
     
-    var isSectionZeroVisible: Bool = true
-    var isSectionOneVisibile: Bool = true
-    
-//    var isExpanded: Bool = false
-    
+    var goals: [Goal] = [] /// - SeeAlso `fetchGoalsData()`
+ 
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         print(#function)
-        goalTableView.dataSource = self
-        goalTableView.delegate = self
-        goalTableView.separatorStyle = .none
+        GoalAndFootprintTableView.dataSource = self
+        GoalAndFootprintTableView.delegate = self
+        GoalAndFootprintTableView.separatorStyle = .none
         
         DBController.shared.createGoalsTable()
-//        DBController.shared.displayGoals()
-        goals = DBController.shared.fetchGoals()
-        visibleGoals = goals.reversed()
+        DBController.shared.createFootprintTable()
+        fetchGoalsData()
+        fetchFootprintsData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(addGoal(notification:)), name: Notification.Name("AddGoalNotification"), object: nil)
+        registerCells()
     }
     
-   override func viewWillAppear(_ animated: Bool) {
-       print(#function)
-        super.viewWillAppear(animated)
-        goals = DBController.shared.fetchGoals()
-        visibleGoals = goals.reversed()
-        goalTableView.reloadData()
-    }
+    /*override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        footprintsData.removeAll()
+        goals.removeAll()
+        fetchGoalsData()
+        fetchFootprintsData()
+        isSectionCollapsed = [false, false]
+        GoalAndFootprintTableView.reloadData()
+    }*/
     
-    // Deinitializer
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
     
     // MARK: - OBJC methods
-    @objc private func addGoal(notification: Notification) {
-        if let newGoal = notification.object as? Goal {
-            DBController.shared.displayGoals()
-            goals.append(newGoal)
-            visibleGoals = goals.reversed()
-            
-            if let newIndex = visibleGoals.firstIndex(where: { $0 == newGoal }) {
-                let sectionToReload = 0
-                let indexPathToReload = IndexPath(row: newIndex, section: sectionToReload)
-                
-                goalTableView.beginUpdates()
-                goalTableView.insertRows(at: [indexPathToReload], with: .automatic)
-                goalTableView.endUpdates()
-                
-                DispatchQueue.main.async {
-                    // Scroll to the top
-                    self.goalTableView.scrollToRow(at: indexPathToReload, at: .top, animated: true)
-                    
-                    if let cell = self.goalTableView.cellForRow(at: indexPathToReload) {
-                        cell.backgroundColor = UIColor.systemGray5
-                    }
-                }
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    if let cell = self.goalTableView.cellForRow(at: indexPathToReload) {
-                        cell.backgroundColor = UIColor.white
-                    }
+    
+    // MARK: - private methods
+    private func registerCells() {
+        GoalAndFootprintTableView.register(FootprintTableViewCell.self, forCellReuseIdentifier: FootprintTableViewCell.reuseIdentifier)
+    }
+    
+    private func fetchFootprintsData() {
+        DBController.shared.fetchFootprints { fetchedFootprints, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if let footprints = fetchedFootprints {
+                for footprint in footprints {
+                    self.footprintsData.append(footprint)
+                    self.footprintsData.reverse()
+                }
+            }
+        }
+    }
+    
+    private func fetchGoalsData() {
+        DBController.shared.fetchGoals { incomingGoals, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if let fetchedGoals = incomingGoals {
+                for goal in fetchedGoals {
+                    self.goals.append(goal)
+                    self.goals.reverse()
                 }
             }
         }
@@ -98,20 +93,30 @@ extension GoalViewController: UITableViewDataSource {
     
     // configure number of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? visibleGoals.count : footprints.count
+        if section == 0 {
+            return isSectionCollapsed[section] ? 0 : goals.count
+        } else {
+            return isSectionCollapsed[section] ? 0 : footprintsData.count
+        }
     }
     
     // configure cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = goalTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as! GoalTableViewCell
-        
-        if indexPath.section == 0 && indexPath.row < goals.count  {
-            cell.updateCell(withGoal: visibleGoals[indexPath.row])
-        } else if indexPath.section == 1 && indexPath.row < footprints.count{
-            // TODO: populate the cell
+        if indexPath.section == 0 {
+            if let goalCell = GoalAndFootprintTableView.dequeueReusableCell(withIdentifier: "GoalTableViewCell", for: indexPath) as? GoalTableViewCell {
+                goalCell.updateCell(withGoal: goals[indexPath.row])
+                
+                return goalCell
+            }
+        } else if indexPath.section == 1 {
+            if let footprintCell = GoalAndFootprintTableView.dequeueReusableCell(withIdentifier: FootprintTableViewCell.reuseIdentifier, for: indexPath) as? FootprintTableViewCell {
+                footprintCell.updateCell(with: footprintsData[indexPath.row])
+                
+                return footprintCell
+            }
         }
         
-        return cell
+        return UITableViewCell()
     }
 }
 
@@ -119,7 +124,11 @@ extension GoalViewController: UITableViewDataSource {
 extension GoalViewController: UITableViewDelegate {
     // configure height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 108.0
+        if indexPath.section == 0 {
+            return 108.0
+        } else {
+            return 88.0
+        }
     }
     
     // pass view to the section heeader
@@ -144,7 +153,7 @@ extension GoalViewController: UITableViewDelegate {
     // action on selecting the cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row < goals.count {
-            let selectedGoal = visibleGoals[indexPath.row]
+            let selectedGoal = goals[indexPath.row]
             
             let goalDetailedViewController  = GoalDetailedViewController()
             
@@ -152,7 +161,7 @@ extension GoalViewController: UITableViewDelegate {
             
             self.navigationController?.pushViewController(goalDetailedViewController, animated: true)
             
-        } else if indexPath.row == 1 && indexPath.row < footprints.count {
+        } else if indexPath.row == 1 && indexPath.row < footprintsData.count {
             // TODO: Handle the footprint selction
         }
     }
@@ -171,32 +180,64 @@ extension GoalViewController: GoalSectionHeaderViewDelegate {
     // show and hide the cells
     func toggleButtonTapped(inSection section: Int) {
         if section == 0 {
-            isSectionZeroVisible.toggle()
-            if isSectionZeroVisible {
-                visibleGoals = goals.reversed()
-            } else {
-                visibleGoals.removeAll()
-            }
+            isSectionCollapsed[section].toggle()
+            GoalAndFootprintTableView.reloadSections(IndexSet(integer: 0), with: .none)
         } else if section == 1 {
-            isSectionOneVisibile.toggle()
+            isSectionCollapsed[section].toggle()
+            GoalAndFootprintTableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
         
-        goalTableView.reloadData()
+        
     }
     
     // action for add button in add goals section header
     func addButtonTapped(inSection section: Int) {
         if section == 0 {
-            //print("Present addGoal controller.")
             let addGoalViewController = AddGoalViewController()
+            addGoalViewController.isSectionCollapsed = self.isSectionCollapsed
+            addGoalViewController.reloadDelegate = self
             let rootViewController = UINavigationController(rootViewController: addGoalViewController)
-            // present
             self.present(rootViewController, animated: true)
         } else {
-            //print("Present addFootprint controller.")
             let calculateVC = CalculateViewController()
+            calculateVC.reloadDelegate = self
             let rootVC = UINavigationController(rootViewController: calculateVC)
             self.present(rootVC, animated: true)
+        }
+    }
+}
+
+// MARK: - Delagate for reloading the goal table on dismissal of the table view
+extension GoalViewController: DataReloadDelegate {
+    func reloadGoalData() {
+        goals.removeAll()
+        fetchGoalsData()
+        isSectionCollapsed[0] = false
+        self.GoalAndFootprintTableView.reloadData()
+        
+        GoalAndFootprintTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if let cell = GoalAndFootprintTableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
+            cell.contentView.backgroundColor = UIColor.systemGray6
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                cell.contentView.backgroundColor = UIColor.systemBackground
+            }
+        }
+    }
+    
+    func reloadFootprintData() {
+        footprintsData.removeAll()
+        fetchFootprintsData()
+        isSectionCollapsed[1] = false
+        self.GoalAndFootprintTableView.reloadData()
+        
+        GoalAndFootprintTableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+        if let cell = GoalAndFootprintTableView.cellForRow(at: IndexPath(row: 0, section: 1)) {
+            cell.contentView.backgroundColor = UIColor.systemGray6
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                cell.contentView.backgroundColor = UIColor.systemBackground
+            }
         }
     }
 }

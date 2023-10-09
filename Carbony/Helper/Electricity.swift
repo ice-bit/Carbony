@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Electricity {
+    let usageKWh: Double
+    let source: ElectricitySource
+}

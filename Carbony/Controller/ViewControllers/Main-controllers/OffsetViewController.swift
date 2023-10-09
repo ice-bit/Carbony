@@ -12,8 +12,8 @@ class OffsetViewController: UIViewController {
     let offsetTableView = UITableView()
     
     let carbonCreditCellData: [CarbonCreditCellModal] = [
-        CarbonCreditCellModal(title: "Available Credits", progress: "98", iconName: "chevron.right", disclosureTitle: "Sell", targetLeftValue: "56"),
-        CarbonCreditCellModal(title: "Required Credits", progress: "44", iconName: "chevron.right", disclosureTitle: "Buy", targetLeftValue: "44")
+        CarbonCreditCellModal(title: "Available Credits", progress: "0", iconName: "chevron.right", disclosureTitle: "Sell", targetLeftValue: "56"),
+        CarbonCreditCellModal(title: "Required Credits", progress: "0", iconName: "chevron.right", disclosureTitle: "Buy", targetLeftValue: "44")
     ]
     
     // MARK: - Viewcontroller lifecycle methods

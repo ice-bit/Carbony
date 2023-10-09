@@ -6,9 +6,14 @@
 //
 
 import UIKit
-
+protocol DataReloadDelegate {
+    func reloadGoalData()
+    func reloadFootprintData()
+}
 class CalculateViewController: UIViewController {
-    // MARK: Properties
+    // MARK: - Properties
+    var reloadDelegate: DataReloadDelegate?
+    
     let calculateTableView: UITableView = {
         let tableView = UITableView()
         tableView.allowsSelection = false
@@ -17,7 +22,17 @@ class CalculateViewController: UIViewController {
         return tableView
     }()
     
+    let carbonFootprintController = CarbonFootprintController()
+    
+    let typeValues: [String] = ["Coal", "Natural gas", "Nuclear"]
+    
     var selectedSegmentIndex: Int = 0 // Default value of segment
+    
+    let transportPlaceholderTexts: [String] = ["Distance", "Vehicle Effiencey", "Frequency"]
+    let electricityPlaceholderTexts: [String] = ["KWh", "Source"]
+    
+    var transportInputs: [String: Double] = [:]
+    var electricityInputs: [String: Double] = [:]
     
     // MARK: - ViewController lifecylce methods
     override func viewDidLoad() {
@@ -25,12 +40,12 @@ class CalculateViewController: UIViewController {
         self.title = "Calculate Footprint"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setupCancelButton()
-       // setupAndActivateContraints()
         setupAndConstraintTableView()
         registerCells()
         
         calculateTableView.delegate = self
         calculateTableView.dataSource = self
+        
     }
     
     // MARK: - OBJC methods
@@ -61,6 +76,39 @@ class CalculateViewController: UIViewController {
             calculateTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
+    
+    private func AddFootprintToDataBase(for input: [String: Double]) {
+        var emissionValue: Double = 0.0
+        
+        if selectedSegmentIndex == 0 {
+            guard let distance = input["Distance"], let fuelEfficiency = input["Vehicle Effiencey"], let frequency = input["Frequency"] else {
+                return
+            }
+            
+            emissionValue = carbonFootprintController.calculateDrivingEmission(distance: distance, fuelEfficiency: fuelEfficiency, frequency: Int(frequency), emissionFactor: 4.6)
+            let carbonFootprint = CarbonFootprint(uuid: UUID(), emissionValue: emissionValue, footprintType: "Transport", date: Date())
+            
+            DBController.shared.insertIntoFootprintTable(uuid: carbonFootprint.uuid, emissioValue: carbonFootprint.emissionValue, footprintType: carbonFootprint.footprintType, date: carbonFootprint.date)
+            DBController.shared.printFootprintTableRows()
+        } else if selectedSegmentIndex == 1 {
+            guard let KWh = input["KWh"] else {
+                return
+            }
+            
+            emissionValue = carbonFootprintController.calculateElectricityEmission(electricityConsumedKWh: KWh, electricitySource: ElectricitySource.coal)
+            let carbonFootprint = CarbonFootprint(uuid: UUID(), emissionValue: emissionValue, footprintType: "Electrictiy", date: Date())
+            
+            DBController.shared.insertIntoFootprintTable(uuid: carbonFootprint.uuid, emissioValue: carbonFootprint.emissionValue, footprintType: carbonFootprint.footprintType, date: carbonFootprint.date)
+            DBController.shared.printFootprintTableRows()
+        }
+        
+        self.dismiss(animated: true) {
+            self.reloadDelegate?.reloadFootprintData()
+        }
+        /*carbonFootprintController.updateTotalFootprint(with: emissionValue)
+        print("Total footprint: \(UserDefaults.standard.double(forKey: "totalFootprint"))")*/
+    }
+
 }
 
 // MARK: - TableView delegate
@@ -98,14 +146,17 @@ extension CalculateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section == 2 else { return 1 }
         
-        return 2
+        if selectedSegmentIndex == 0 {
+            return 3
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if let footprintHeaderViewCell = calculateTableView.dequeueReusableCell(withIdentifier: FootprintDisplayCell.reuseIdentifier, for: indexPath) as? FootprintDisplayCell {
                 footprintHeaderViewCell.customTitleValue = "786"
-//                footprintHeaderViewCell.backgroundColor = .systemPink
                 return footprintHeaderViewCell
             }
         } else if indexPath.section == 1 {
@@ -115,23 +166,18 @@ extension CalculateViewController: UITableViewDataSource {
             }
         } else if indexPath.section == 2 {
             if let inputCell = calculateTableView.dequeueReusableCell(withIdentifier: CalculateInputTableViewCell.reuseIdentifier, for: indexPath) as? CalculateInputTableViewCell {
-                if indexPath.row == 0 {
-                    if selectedSegmentIndex == 0 {
-                        inputCell.inputTextField.placeholder = "Distance"
-                    } else if selectedSegmentIndex == 1 {
-                        inputCell.inputTextField.placeholder = "KWh"
-                    }
-                    
-                    
-                } else if indexPath.row == 1 {
-                    inputCell.inputTextField.placeholder = "Vechicle Efficiency"
-                    inputCell.inputTextField.placeholder = "Source"
+                if selectedSegmentIndex == 0 {
+                    let placeholderData = transportPlaceholderTexts[indexPath.row]
+                    inputCell.inputTextField.placeholder = placeholderData
+                } else {
+                    let placeholderData = electricityPlaceholderTexts[indexPath.row]
+                    inputCell.inputTextField.placeholder = placeholderData
                 }
-                
                 return inputCell
             }
         } else if indexPath.section == 3 {
             if let calculateButtonsCell = calculateTableView.dequeueReusableCell(withIdentifier: CFCustomButtonsCell.reuseIdentifier, for: indexPath) as? CFCustomButtonsCell {
+                calculateButtonsCell.cfButtonDelegate = self
                 calculateButtonsCell.customLightButtonTitle = "Calculate"
                 calculateButtonsCell.customDarkButtonTitle = "Add"
                 return calculateButtonsCell
@@ -147,6 +193,73 @@ extension CalculateViewController: TypeSelectionSegmentControlDelegate {
         selectedSegmentIndex = segmentControl.selectedSegmentIndex
         calculateTableView.reloadSections(IndexSet(integer: 2), with: .automatic)
     }
+}
+
+extension CalculateViewController: CFCustomButtonCellDelegate {
+    // Action for calculate button
+    func didTappedLightButton() {
+        
+    }
     
+    // Action for add footprint button
+    func didTappedDarkButton() {
+        if selectedSegmentIndex == 0 {
+            fetchTransportInputs()
+            
+        } else if selectedSegmentIndex == 1 {
+            fetchElectircityInput()
+        }
+    }
     
+    private func fetchElectircityInput() {
+        if let inputCell = calculateTableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? CalculateInputTableViewCell {
+            guard inputCell.inputTextField.text != nil else {
+                showAlert(title: "No values found", message: "Enter values into the text field") {
+                    self.dismiss(animated: true)
+                }
+                return
+            }
+            
+            if let inputText = inputCell.inputTextField.text,
+               let placeholderText = inputCell.inputTextField.placeholder,
+               let input = Double(inputText) {
+                print("\(placeholderText): \(input)")
+                electricityInputs[placeholderText] = input
+            } else {
+                showAlert(title: "Invalid input", message: "Try to enter a valid input") {
+                    self.dismiss(animated: true)
+                }
+                print("Failed to convert the input values")
+            }
+        }
+        
+        AddFootprintToDataBase(for: electricityInputs)
+    }
+    
+    private func fetchTransportInputs() {
+        for index in 0..<3 {
+            if let inputCell = calculateTableView.cellForRow(at: IndexPath(row: index, section: 2)) as? CalculateInputTableViewCell {
+                guard inputCell.inputTextField.text != nil else {
+                    showAlert(title: "No values found", message: "Enter values into the text field") {
+                        self.dismiss(animated: true)
+                    }
+                    return
+                }
+                
+                if let inputText = inputCell.inputTextField.text,
+                   let placeholderText = inputCell.inputTextField.placeholder,
+                   let input = Double(inputText) {
+                    //print("\(placeholderText): \(input)")
+                    transportInputs[placeholderText] = input
+                } else {
+                    showAlert(title: "Invalid input", message: "Try to enter a valid input") {
+                        self.dismiss(animated: true)
+                    }
+                    print("Failed to convert the input values")
+                }
+            }
+        }
+        
+        AddFootprintToDataBase(for: transportInputs)
+    }
 }

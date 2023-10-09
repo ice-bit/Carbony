@@ -19,7 +19,7 @@ class CCreditTableViewCell: UITableViewCell {
     
     var customProgressDisclosure: String = "941%" {
         didSet {
-            progressLabel.text = "\(customProgressDisclosure)%"
+            progressLabel.text = customProgressDisclosure
         }
     }
     

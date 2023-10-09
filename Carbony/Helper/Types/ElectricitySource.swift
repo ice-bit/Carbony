@@ -7,6 +7,15 @@
 
 import Foundation
 
-enum ElectricitySource {
-    case coal, naturalGas
+enum ElectricitySource: String {
+    case coal = "coal"
+    case naturalGas = "naturalGas"
+    case oil = "oil"
+    case nuclear = "nuclear"
+    case hydropower = "hydropower"
+    case wind = "wind"
+    case solar = "solar"
+    case biomass = "biomass"
+    
 }
+

@@ -18,7 +18,6 @@ class FootprintDisplayCell: UITableViewCell {
     
     let carbonFootprintLabel: UILabel = {
         let label = UILabel()
-        label.text = "9.41"
         label.font = UIFont.systemFont(ofSize: 64, weight: .heavy)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -57,6 +56,7 @@ class FootprintDisplayCell: UITableViewCell {
     private func setupLabel() {
         contentView.addSubview(carbonFootprintLabel)
         contentView.addSubview(unitLabel)
+        carbonFootprintLabel.text = customTitleValue
         
         NSLayoutConstraint.activate([
             // constraints for carbonFootprintLabel

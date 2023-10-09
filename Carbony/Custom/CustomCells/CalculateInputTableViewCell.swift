@@ -52,5 +52,4 @@ class CalculateInputTableViewCell: UITableViewCell {
             inputTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
-
 }

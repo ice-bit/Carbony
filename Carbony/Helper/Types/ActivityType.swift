@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum ActivityType {
-    case driving, electricity
+enum ActivityType: String {
+    case transport = "Transport"
+    case electricity = "Electricity"
 }

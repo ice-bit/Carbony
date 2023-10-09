@@ -7,18 +7,25 @@
 
 import UIKit
 
+protocol CFCustomButtonCellDelegate {
+    func didTappedLightButton()
+    func didTappedDarkButton()
+}
+
 class CFCustomButtonsCell: UITableViewCell {
     static let reuseIdentifier: String = "CarbonTradeCellTableViewCell"
     
+    var cfButtonDelegate: CFCustomButtonCellDelegate?
+    
     var customLightButtonTitle: String = "" {
         didSet {
-            sellButton.setTitle(customLightButtonTitle, for: .normal)
+            lightButton.setTitle(customLightButtonTitle, for: .normal)
         }
     }
     
     var customDarkButtonTitle: String = "" {
         didSet {
-            buyButton.setTitle(customDarkButtonTitle, for: .normal)
+            darkbutton.setTitle(customDarkButtonTitle, for: .normal)
         }
     }
     
@@ -34,7 +41,7 @@ class CFCustomButtonsCell: UITableViewCell {
         return view
     }()
     
-    let buyButton: CFCustomButton = {
+    let darkbutton: CFCustomButton = {
         let buyButton = CFCustomButton()
         buyButton.customBackgroundColor = .label
         buyButton.customTextColor = .systemBackground
@@ -42,7 +49,7 @@ class CFCustomButtonsCell: UITableViewCell {
         return buyButton
     }()
     
-    let sellButton: CFCustomButton = {
+    let lightButton: CFCustomButton = {
         let sellButton = CFCustomButton()
         sellButton.translatesAutoresizingMaskIntoConstraints = false
         return sellButton
@@ -71,8 +78,8 @@ class CFCustomButtonsCell: UITableViewCell {
     private func setupButtons() {
         contentView.addSubview(sellButtonWrapper)
         contentView.addSubview(buyButtonWrapper)
-        sellButtonWrapper.addSubview(sellButton)
-        buyButtonWrapper.addSubview(buyButton)
+        sellButtonWrapper.addSubview(lightButton)
+        buyButtonWrapper.addSubview(darkbutton)
         
         NSLayoutConstraint.activate([
             sellButtonWrapper.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -85,16 +92,29 @@ class CFCustomButtonsCell: UITableViewCell {
             buyButtonWrapper.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             buyButtonWrapper.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
             
-            sellButton.heightAnchor.constraint(equalToConstant: 49),
-            sellButton.widthAnchor.constraint(equalTo: sellButtonWrapper.widthAnchor, multiplier: 0.8),
-            sellButton.centerXAnchor.constraint(equalTo: sellButtonWrapper.centerXAnchor),
-            sellButton.centerYAnchor.constraint(equalTo: sellButtonWrapper.centerYAnchor),
+            lightButton.heightAnchor.constraint(equalToConstant: 49),
+            lightButton.widthAnchor.constraint(equalTo: sellButtonWrapper.widthAnchor, multiplier: 0.8),
+            lightButton.centerXAnchor.constraint(equalTo: sellButtonWrapper.centerXAnchor),
+            lightButton.centerYAnchor.constraint(equalTo: sellButtonWrapper.centerYAnchor),
             
-            buyButton.heightAnchor.constraint(equalToConstant: 49),
-            buyButton.widthAnchor.constraint(equalTo: buyButtonWrapper.widthAnchor, multiplier: 0.85),
-            buyButton.centerXAnchor.constraint(equalTo: buyButtonWrapper.centerXAnchor),
-            buyButton.centerYAnchor.constraint(equalTo: buyButtonWrapper.centerYAnchor),
+            darkbutton.heightAnchor.constraint(equalToConstant: 49),
+            darkbutton.widthAnchor.constraint(equalTo: buyButtonWrapper.widthAnchor, multiplier: 0.85),
+            darkbutton.centerXAnchor.constraint(equalTo: buyButtonWrapper.centerXAnchor),
+            darkbutton.centerYAnchor.constraint(equalTo: buyButtonWrapper.centerYAnchor),
         ])
+        
+        lightButton.addTarget(self, action: #selector(sellButtonAction(_ :)), for: .touchUpInside)
+        darkbutton.addTarget(self, action: #selector(buyButtonAction(_ :)), for: .touchUpInside)
+    }
+    
+    @objc func sellButtonAction(_ sender: UIButton) {
+        print("Light button tapped")
+        cfButtonDelegate?.didTappedLightButton()
+    }
+    
+    @objc func buyButtonAction(_ sender: UIButton) {
+        print("Dark button tapped")
+        cfButtonDelegate?.didTappedDarkButton()
     }
 
 }
